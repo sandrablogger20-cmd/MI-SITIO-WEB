@@ -622,10 +622,10 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 <!-- ============================================================
      CHAT FLOTANTE (Fase 11)
      ============================================================ -->
-<div class="chat-flotante-wrap">
-  <!-- Fase 11: acá va el widget de chat de IA -->
-  <div id="chat-widget" class="placeholder-widget" data-i18n-label="ph_chat" data-label="Chat de IA (Fase 11)" role="button" tabindex="0" aria-label="Abrir chat"></div>
-</div>
+<!-- Fase 11: chat de IA (Chatbase) -->
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="b5Kt42jYXQeY6xnQJz8e5";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
 
 <!-- ============================================================
      MODAL "Agendá 20 minutos" (Fase 9)
