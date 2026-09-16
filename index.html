@@ -212,6 +212,24 @@ main { padding-top: var(--alto-header); }
 .btn-cta.secundario:hover { background: var(--teal); }
 
 /* ============================================================
+   4.5) SOBRE MÍ — foto de autoridad + bio, compartida entre perfiles
+   ============================================================ */
+.sobre-mi { background: var(--blanco); padding: 48px 0; }
+.sobre-mi__grid {
+  display: flex; flex-direction: column; gap: 28px; align-items: center;
+}
+@media (min-width: 720px) {
+  .sobre-mi__grid { flex-direction: row; align-items: flex-start; }
+}
+.sobre-mi__foto {
+  width: 220px; height: 220px; border-radius: var(--radio);
+  object-fit: cover; object-position: top center;
+  flex-shrink: 0;
+}
+.sobre-mi__texto h2 { margin-bottom: .6em; }
+.sobre-mi__texto p { max-width: 62ch; }
+
+/* ============================================================
    5) PERFILES (#legal / #omc) — bloques de contenido
    ============================================================ */
 .seccion-perfil { padding: 48px 0; border-bottom: 1px solid rgba(var(--navy-rgb), .08); }
@@ -399,6 +417,19 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
   </section>
 
   <!-- ============================================================
+       SOBRE MÍ — sección compartida, una sola vez para los dos perfiles
+       ============================================================ -->
+  <section class="sobre-mi" id="sobre-mi" aria-labelledby="sobre-mi-titulo">
+    <div class="contenedor sobre-mi__grid">
+      <img class="sobre-mi__foto" src="foto-sandra-autoridad.jpg" alt="Retrato de Sandra Barraza">
+      <div class="sobre-mi__texto">
+        <h2 id="sobre-mi-titulo" data-i18n="sobremi_h2">Sobre mí</h2>
+        <p><span class="cifra" data-i18n="sobremi_cifra">31 años</span> <span data-i18n="sobremi_resto">detectando el error que hunde una investigación entera — primero en la defensa comercial internacional de la Argentina, hoy aplicados a auditar sistemas de IA. Diseño sistemas que le sacan a estudios jurídicos, consultoras y pymes las tareas repetitivas que no requieren criterio profesional, y asesoro en comercio exterior y OMC dentro de límites de incompatibilidad que declaro abiertamente.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
        PERFIL #legal — Estudios jurídicos, consultoras y pymes
        ============================================================ -->
   <section class="seccion-perfil" id="legal" aria-labelledby="legal-titulo">
@@ -412,7 +443,7 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <!-- Presentación -->
       <div class="bloque" id="legal-presentacion">
         <h3 data-i18n="presentacion_h3">Quién soy / a quién ayudo</h3>
-        <p><span class="cifra" data-i18n="legal_presentacion_cifra">31 años</span> <span data-i18n="legal_presentacion_resto">detectando el error que hunde una investigación entera, hoy aplicados a diseñar sistemas de IA que le sacan a estudios jurídicos boutique, consultoras y pymes las tareas repetitivas que no requieren el criterio de un profesional. Ya validado con un estudio real de Buenos Aires.</span></p>
+        <p data-i18n="legal_presentacion_p">Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.</p>
       </div>
 
       <!-- Para quién sí / no -->
@@ -516,7 +547,7 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <!-- Presentación -->
       <div class="bloque" id="omc-presentacion">
         <h3 data-i18n="presentacion_h3">Quién soy / a quién ayudo</h3>
-        <p><span data-i18n="omc_presentacion_pre">Más de</span> <span class="cifra" data-i18n="omc_presentacion_cifra">tres décadas</span> <span data-i18n="omc_presentacion_resto">siguiendo la jurisprudencia de la OMC en dumping, subvenciones y salvaguardias, caso por caso, desde 1995. Hoy asesoro a exportadores argentinos, empresas extranjeras y consultoras de comercio exterior, dentro de límites de incompatibilidad que declaro abiertamente.</span></p>
+        <p data-i18n="omc_presentacion_p">Capacitación y asesoría técnica en los tres acuerdos de defensa comercial de la OMC, para exportadores argentinos, empresas extranjeras y consultoras de comercio exterior.</p>
       </div>
 
       <!-- Para quién sí / no -->
@@ -674,8 +705,10 @@ var i18n = {
 
     legal_rotulo: "Perfil A",
     legal_h2: "Sistemas de IA para estudios jurídicos, consultoras y pymes",
-    legal_presentacion_cifra: "31 años",
-    legal_presentacion_resto: "detectando el error que hunde una investigación entera, hoy aplicados a diseñar sistemas de IA que le sacan a estudios jurídicos boutique, consultoras y pymes las tareas repetitivas que no requieren el criterio de un profesional. Ya validado con un estudio real de Buenos Aires.",
+    sobremi_h2: "Sobre mí",
+    sobremi_cifra: "31 años",
+    sobremi_resto: "detectando el error que hunde una investigación entera — primero en la defensa comercial internacional de la Argentina, hoy aplicados a auditar sistemas de IA. Diseño sistemas que le sacan a estudios jurídicos, consultoras y pymes las tareas repetitivas que no requieren criterio profesional, y asesoro en comercio exterior y OMC dentro de límites de incompatibilidad que declaro abiertamente.",
+    legal_presentacion_p: "Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.",
     legal_si_p: "Un estudio de 2 a 8 abogados, una consultora de comercio exterior o una pyme donde el dueño todavía redacta a mano, revisa notificaciones a mano y busca el estado de un caso entre carpetas y WhatsApp.",
     legal_no_h3: "No, si sos",
     legal_no_p: "Un corporativo grande con área de IT propia, o buscás soporte técnico de software en general — esto es diseño de sistemas a medida, no una mesa de ayuda.",
@@ -704,9 +737,7 @@ var i18n = {
 
     omc_rotulo: "Perfil B",
     omc_h2: "Comercio exterior / OMC",
-    omc_presentacion_pre: "Más de",
-    omc_presentacion_cifra: "tres décadas",
-    omc_presentacion_resto: "siguiendo la jurisprudencia de la OMC en dumping, subvenciones y salvaguardias, caso por caso, desde 1995. Hoy asesoro a exportadores argentinos, empresas extranjeras y consultoras de comercio exterior, dentro de límites de incompatibilidad que declaro abiertamente.",
+    omc_presentacion_p: "Capacitación y asesoría técnica en los tres acuerdos de defensa comercial de la OMC, para exportadores argentinos, empresas extranjeras y consultoras de comercio exterior.",
     omc_si_p: "Un exportador argentino investigado en el exterior, una empresa extranjera que necesita entender su propio procedimiento, o una consultora/cámara que necesita capacitación o sistemas.",
     omc_no_h3: "No, si necesitás",
     omc_no_p: "Representación ante autoridades argentinas competentes, o asesoría sobre un expediente en el que haya intervenido antes — eso no lo puedo tomar, sin excepción.",
@@ -764,8 +795,10 @@ var i18n = {
 
     legal_rotulo: "Profile A",
     legal_h2: "AI systems for law firms, consultancies and small businesses",
-    legal_presentacion_cifra: "31 years",
-    legal_presentacion_resto: "of catching the single error that can sink an entire investigation — now applied to designing AI systems that take repetitive, non-expert tasks off the plate of boutique law firms, consultancies and small businesses. Already validated with a real Buenos Aires firm.",
+    sobremi_h2: "About me",
+    sobremi_cifra: "31 years",
+    sobremi_resto: "of catching the single error that can sink an entire investigation — first in Argentina's international trade defense, now applied to auditing AI systems. I design systems that take repetitive, non-expert tasks off the plate of law firms, consultancies and small businesses, and advise on international trade and WTO matters within incompatibility limits I disclose upfront.",
+    legal_presentacion_p: "I design and implement AI systems that give boutique law firms, consultancies and small businesses back hours every week — already validated with a real Buenos Aires firm.",
     legal_si_p: "A firm with 2 to 8 lawyers, a trade consultancy, or a small business where the owner still drafts documents by hand, checks notifications by hand, and hunts for a case's status across folders and WhatsApp.",
     legal_no_h3: "No, if you are",
     legal_no_p: "A large corporation with its own IT department, or you're looking for general software support — this is custom systems design, not a help desk.",
@@ -794,9 +827,7 @@ var i18n = {
 
     omc_rotulo: "Profile B",
     omc_h2: "International Trade / WTO",
-    omc_presentacion_pre: "Over",
-    omc_presentacion_cifra: "three decades",
-    omc_presentacion_resto: "tracking WTO case law on dumping, subsidies and safeguards, case by case, since 1995. Today I advise Argentine exporters, foreign companies and trade consultancies, within incompatibility limits I disclose upfront.",
+    omc_presentacion_p: "Training and technical advisory on the WTO's three trade defense agreements, for Argentine exporters, foreign companies and trade consultancies.",
     omc_si_p: "An Argentine exporter under investigation abroad, a foreign company that needs to understand its own domestic procedure, or a consultancy/trade chamber that needs training or systems.",
     omc_no_h3: "No, if you need",
     omc_no_p: "Representation before competent Argentine authorities, or advice on a case I've been involved in before — that I can't take on, no exceptions.",
