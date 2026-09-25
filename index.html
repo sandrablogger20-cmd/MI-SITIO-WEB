@@ -6,6 +6,21 @@
 <title id="titulo-pagina">Sandra Barraza — Sistemas de IA y asesoría en comercio exterior/OMC</title>
 <meta id="meta-descripcion" name="description" content="Sistemas de IA para estudios jurídicos, consultoras y pymes, y asesoría técnica en comercio exterior y OMC.">
 
+<!-- Fase 3 (v5) — Metadatos para la vista previa al compartir el link
+     (LinkedIn, WhatsApp, etc.). Los rastreadores de redes sociales NO
+     ejecutan JavaScript, así que estos valores quedan fijos en español
+     — el sistema bilingüe de la Fase 3.5 no los puede traducir por
+     idioma del visitante, solo el contenido visible de la página. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sandrablogger20-cmd.github.io/MI-SITIO-WEB/">
+<meta property="og:title" content="Sandra Barraza — Sistemas de IA para tu negocio y asesoría OMC">
+<meta property="og:description" content="Sistemas de IA que automatizan tareas repetitivas de tu pyme o estudio, y asesoría técnica en comercio exterior y OMC.">
+<meta property="og:image" content="https://sandrablogger20-cmd.github.io/MI-SITIO-WEB/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sandra Barraza — Sistemas de IA para tu negocio y asesoría OMC">
+<meta name="twitter:description" content="Sistemas de IA que automatizan tareas repetitivas de tu pyme o estudio, y asesoría técnica en comercio exterior y OMC.">
+<meta name="twitter:image" content="https://sandrablogger20-cmd.github.io/MI-SITIO-WEB/og-image.jpg">
+
 <!-- Fase 3: tipografías de marca desde Google Fonts -->
 <!-- Poppins 600 (títulos/CTA) · Nunito 400 y 700 (cuerpo) · Lora 600 y 400 itálica (cifras/citas) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -230,7 +245,7 @@ main { padding-top: var(--alto-header); }
 .sobre-mi__texto p { max-width: 62ch; }
 
 /* ============================================================
-   5) PERFILES (#legal / #omc) — bloques de contenido
+   5) PERFILES (#sistemas / #omc) — bloques de contenido
    ============================================================ */
 .seccion-perfil { padding: 48px 0; border-bottom: 1px solid rgba(var(--navy-rgb), .08); }
 .seccion-perfil:nth-of-type(even) { background: rgba(var(--teal-rgb), .05); }
@@ -357,6 +372,108 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
   background: transparent; border: none; float: right;
   font-size: 1.3rem; line-height: 1; color: var(--slate);
 }
+
+/* ============================================================
+   10) GALERÍA DE DEMOS (Fase 5, v5) — destacada + grilla filtrable
+   ============================================================ */
+.galeria-aviso {
+  background: rgba(var(--teal-rgb), .08); border-left: 4px solid var(--teal);
+  padding: 12px 16px; border-radius: var(--radio);
+  font-size: .95rem; color: var(--navy); max-width: none;
+}
+
+/* Marco de video: relación fija 16:9, independiente del video real */
+.demo-marco {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  background: var(--teal-dark); border-radius: var(--radio);
+  overflow: hidden; cursor: pointer; border: none; padding: 0;
+}
+.demo-marco img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.demo-marco iframe { width: 100%; height: 100%; border: 0; display: block; }
+.demo-marco__play {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: rgba(var(--navy-rgb), .25);
+}
+.demo-marco__play::after {
+  content: '▶'; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--magenta); color: var(--blanco);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; padding-left: 4px;
+}
+/* Sin video real cargado todavía: mismo look que el placeholder genérico */
+.demo-marco.demo-marco--vacio {
+  border: 2px dashed var(--slate); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+}
+.demo-marco.demo-marco--vacio::after {
+  content: attr(data-pendiente);
+  font-family: var(--font-cuerpo); font-weight: 700; color: var(--slate);
+  font-size: .9rem; text-align: center; padding: 12px;
+}
+
+/* Destacada (5A) */
+.demo-destacada {
+  border: 1px solid rgba(var(--navy-rgb), .1); border-radius: var(--radio);
+  padding: 18px; margin: 20px 0 28px;
+  display: grid; gap: 16px;
+}
+@media (min-width: 720px) {
+  .demo-destacada { grid-template-columns: 1.3fr 1fr; align-items: center; }
+}
+.demo-destacada__etiqueta {
+  display: inline-block; background: var(--magenta); color: var(--blanco);
+  font-family: var(--font-titulos); font-size: .8rem; font-weight: 600;
+  padding: 4px 10px; border-radius: 999px; margin-bottom: 8px;
+}
+.demo-destacada__titulo { margin-bottom: 6px; }
+
+/* Filtros */
+.galeria-filtros {
+  display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 20px;
+}
+.filtro-pill {
+  background: var(--blanco); border: 1px solid var(--slate);
+  color: var(--navy); border-radius: 999px; padding: 7px 14px;
+  font-family: var(--font-cuerpo); font-weight: 700; font-size: .9rem;
+}
+.filtro-pill.activo { background: var(--teal); border-color: var(--teal); color: var(--blanco); }
+
+/* Grilla de tarjetas */
+.galeria-grid {
+  display: grid; gap: 20px; grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .galeria-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .galeria-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.demo-card { border: 1px solid rgba(var(--navy-rgb), .1); border-radius: var(--radio); overflow: hidden; }
+.demo-card__cuerpo { padding: 14px; }
+.demo-card__etiqueta { font-size: .8rem; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: .03em; }
+.demo-card__titulo { font-family: var(--font-titulos); font-weight: 600; font-size: 1.05rem; margin: 6px 0; }
+.demo-card__problema { font-size: .95rem; margin-bottom: 8px; }
+.demo-card__meta { font-size: .85rem; color: var(--slate); margin-bottom: 2px; }
+.demo-card__meta strong { color: var(--navy); }
+
+.btn-ver-todas {
+  display: block; margin: 20px auto 0;
+  background: transparent; border: 1px solid var(--teal); color: var(--teal-dark);
+  border-radius: var(--radio); padding: 10px 20px; font-weight: 600;
+}
+.btn-ver-todas[hidden] { display: none; }
+
+/* ============================================================
+   11) POR QUÉ TRABAJAR CONMIGO (Fase 5.5, v5)
+   ============================================================ */
+.porque-grid {
+  display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 12px;
+}
+@media (min-width: 720px) { .porque-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.porque-item {
+  border-top: 3px solid var(--teal); padding-top: 12px;
+}
+.porque-item h4 {
+  font-family: var(--font-titulos); font-weight: 600; font-size: 1.05rem;
+  color: var(--teal-dark); margin-bottom: 6px;
+}
+.porque-item p { font-size: .95rem; }
 </style>
 </head>
 <body>
@@ -398,13 +515,13 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
        ============================================================ -->
   <section class="hero" id="hero">
     <div class="contenedor">
-      <h1 data-i18n="hero_h1">Sistemas de IA para tu organización, y asesoría técnica en comercio exterior y OMC.</h1>
-      <p class="subtitulo" data-i18n="hero_subtitulo">Dos formas distintas de ayudarte a recuperar horas de trabajo: diseño de sistemas que combinan herramientas de IA para automatizar tareas repetitivas y asesoría especializada en defensa comercial internacional. Elegí tu perfil.</p>
+      <h1 data-i18n="hero_h1">Sistemas de IA que automatizan tareas repetitivas, para convertir ese tiempo en más facturación o en tiempo libre.</h1>
+      <p class="subtitulo" data-i18n="hero_subtitulo">Dos formas de ayudarte: diseño sistemas que combinan herramientas de IA para tu pyme o tu práctica profesional, y asesoro en comercio exterior y OMC. Elegí tu perfil.</p>
 
       <nav class="selector-perfil" aria-label="Selector de perfil">
-        <a class="tab-perfil" href="#legal">
-          <strong data-i18n="hero_tab_legal_titulo">Estudios, consultoras y pymes</strong>
-          <span data-i18n="hero_tab_legal_desc">Sistemas de IA que sacan tareas repetitivas de encima — HITL, redacción, monitoreo, seguimiento de causas.</span>
+        <a class="tab-perfil" href="#sistemas">
+          <strong data-i18n="hero_tab_sistemas_titulo">Tengo una pyme o ejerzo una profesión</strong>
+          <span data-i18n="hero_tab_sistemas_desc">Sistemas de IA que sacan tareas repetitivas de encima — turnos, caja, stock, clientes, formularios, escritos.</span>
         </a>
         <a class="tab-perfil" href="#omc">
           <strong data-i18n="hero_tab_omc_titulo">Comercio exterior / OMC</strong>
@@ -430,103 +547,147 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
   </section>
 
   <!-- ============================================================
-       PERFIL #legal — Estudios jurídicos, consultoras y pymes
+       PERFIL #sistemas — Estudios jurídicos, consultoras y pymes
        ============================================================ -->
-  <section class="seccion-perfil" id="legal" aria-labelledby="legal-titulo">
+  <section class="seccion-perfil" id="sistemas" aria-labelledby="sistemas-titulo">
     <div class="contenedor">
 
       <div class="encabezado-perfil">
-        <span class="rotulo" data-i18n="legal_rotulo">Perfil A</span>
-        <h2 id="legal-titulo" data-i18n="legal_h2">Sistemas de IA para estudios jurídicos, consultoras y pymes</h2>
+        <span class="rotulo" data-i18n="sistemas_rotulo">Perfil A</span>
+        <h2 id="sistemas-titulo" data-i18n="sistemas_h2">Sistemas de IA para estudios jurídicos, consultoras y pymes</h2>
       </div>
 
       <!-- Presentación -->
-      <div class="bloque" id="legal-presentacion">
+      <div class="bloque" id="sistemas-presentacion">
         <h3 data-i18n="presentacion_h3">Quién soy / a quién ayudo</h3>
-        <p data-i18n="legal_presentacion_p">Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.</p>
+        <p data-i18n="sistemas_presentacion_p">Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.</p>
       </div>
 
       <!-- Para quién sí / no -->
-      <div class="bloque" id="legal-para-quien">
+      <div class="bloque" id="sistemas-para-quien">
         <h3 data-i18n="paraquien_h3">Para quién es (y para quién no)</h3>
         <div class="dos-columnas">
           <div class="columna-si">
             <h3 data-i18n="si_h3">Sí, si sos</h3>
-            <p data-i18n="legal_si_p">Un estudio de 2 a 8 abogados, una consultora de comercio exterior o una pyme donde el dueño todavía redacta a mano, revisa notificaciones a mano y busca el estado de un caso entre carpetas y WhatsApp.</p>
+            <p data-i18n="sistemas_si_p">Pymes y profesionales con tareas repetitivas que hoy les comen horas — turnos, caja, stock, seguimiento de clientes, formularios, presupuestos, escritos.</p>
           </div>
           <div class="columna-no">
-            <h3 data-i18n="legal_no_h3">No, si sos</h3>
-            <p data-i18n="legal_no_p">Un corporativo grande con área de IT propia, o buscás soporte técnico de software en general — esto es diseño de sistemas a medida, no una mesa de ayuda.</p>
+            <h3 data-i18n="sistemas_no_h3">No, si sos</h3>
+            <p data-i18n="sistemas_no_p">Un corporativo grande con área de IT propia, o buscás soporte técnico de software en general — esto es diseño de sistemas a medida, no una mesa de ayuda.</p>
           </div>
         </div>
       </div>
 
-      <!-- Demo -->
-      <div class="bloque" id="legal-demo">
-        <h3 data-i18n="legal_demo_h3">Vela funcionar antes de hablar conmigo</h3>
-        <div class="demo-caja">
-          <p data-i18n="legal_demo_p">Ejemplo del sistema de redacción en la voz propia: a partir de tres escritos anteriores del estudio, el sistema arma un primer borrador que ya suena como ese abogado escribe — no un texto genérico para reescribir entero.</p>
-          <!-- Fase 5 / 13: acá se va a conectar una demo interactiva real -->
+      <!-- Fase 5 (v5): galería de demos -->
+      <div class="bloque" id="sistemas-galeria">
+        <p class="galeria-aviso" data-i18n="galeria_aviso">Demos construidas con datos ficticios para mostrar cómo funciona cada herramienta. La versión para tu negocio se arma con tus datos y tus herramientas.</p>
+
+        <!-- 5A: demo destacada -->
+        <div id="demo-destacada"></div>
+
+        <!-- 5B: filtros + grilla -->
+        <div class="galeria-filtros" id="galeria-filtros" role="tablist"></div>
+        <div class="galeria-grid" id="galeria-grid"></div>
+        <button class="btn-ver-todas" id="btn-ver-todas-demos" hidden></button>
+      </div>
+
+      <!-- Fase 5.5 (v5): por qué trabajar conmigo — placeholder -->
+      <div class="bloque" id="sistemas-por-que">
+        <h3 data-i18n="porque_h3">Por qué trabajar conmigo</h3>
+        <div class="porque-grid">
+          <div class="porque-item">
+            <h4 data-i18n="porque_1_titulo">Uso las herramientas que ya tenés</h4>
+            <p data-i18n="porque_1_desc">No hace falta migrar de sistema ni comprar licencias nuevas — el sistema se arma sobre lo que tu negocio ya usa.</p>
+          </div>
+          <div class="porque-item">
+            <h4 data-i18n="porque_2_titulo">Nada sale de la IA sin revisión humana</h4>
+            <p data-i18n="porque_2_desc">Es mi oficio: trabajo como auditora HITL (Human-in-the-Loop), certificada por Anthropic en Claude Code, Agent Skills, Subagents y AI Fluency.</p>
+          </div>
+          <div class="porque-item">
+            <h4 data-i18n="porque_3_titulo">Te explico qué es tuyo y qué no, antes de empezar</h4>
+            <p data-i18n="porque_3_desc">Algunos sistemas se entregan completos, con código y accesos; otros se ofrecen como servicio con abono sobre una plantilla mía. Te digo cuál es cuál antes de arrancar, no después.</p>
+          </div>
         </div>
       </div>
 
       <!-- Autodiagnóstico -->
-      <div class="bloque bloque-autodiagnostico" id="legal-autodiagnostico">
-        <h3 data-i18n="legal_autodiag_h3">¿Cuánto tiempo estás perdiendo?</h3>
-        <p data-i18n="legal_autodiag_p">Un formulario corto sobre las tareas repetitivas del estudio o la consultora, que devuelve una estimación de horas semanales recuperables.</p>
+      <div class="bloque bloque-autodiagnostico" id="sistemas-autodiagnostico">
+        <h3 data-i18n="sistemas_autodiag_h3">¿Cuánto tiempo estás perdiendo?</h3>
+        <p data-i18n="sistemas_autodiag_p">Un formulario corto sobre las tareas repetitivas del estudio o la consultora, que devuelve una estimación de horas semanales recuperables.</p>
         <!-- Fase 13: acá va el formulario de autodiagnóstico del Perfil A -->
-        <div id="autodiagnostico-legal" class="placeholder-widget" data-i18n-label="ph_autodiag_legal" data-label="Autodiagnóstico — Perfil A (Fase 13)"></div>
+        <div id="autodiagnostico-sistemas" class="placeholder-widget" data-i18n-label="ph_autodiag_sistemas" data-label="Autodiagnóstico — Perfil A (Fase 13)"></div>
+        <!-- Fase 13 (v5): calculadora de horas liberadas — placeholder -->
+        <div id="calculadora-horas" class="placeholder-widget" data-i18n-label="ph_calculadora" data-label="Calculadora de horas liberadas (Fase 13)"></div>
       </div>
 
       <!-- Cómo trabajo -->
-      <div class="bloque" id="legal-como-trabajo">
+      <div class="bloque" id="sistemas-como-trabajo">
         <h3 data-i18n="como_trabajo_h3">Cómo trabajo</h3>
         <ol class="pasos">
-          <li data-i18n="legal_paso1">Diagnóstico inicial de las tareas repetitivas del estudio o la consultora.</li>
-          <li data-i18n="legal_paso2">Implementación de a un sistema por vez, empezando por el de mayor ahorro semanal.</li>
-          <li data-i18n="legal_paso3">Capacitación breve al equipo para que lo pueda operar sin depender de mí.</li>
-          <li data-i18n="legal_paso4">Período de ajuste con soporte, hasta que el sistema quede afinado.</li>
+          <li data-i18n="sistemas_paso1">Diagnóstico inicial de las tareas repetitivas del estudio o la consultora.</li>
+          <li data-i18n="sistemas_paso2">Implementación de a un sistema por vez, empezando por el de mayor ahorro semanal.</li>
+          <li data-i18n="sistemas_paso3">Capacitación breve al equipo para que lo pueda operar sin depender de mí.</li>
+          <li data-i18n="sistemas_paso4">Período de ajuste con soporte, hasta que el sistema quede afinado.</li>
+        </ol>
+
+        <p class="cita" data-i18n="sistemas_no_honesto">Si en la charla vemos que todavía no te conviene automatizar nada, te lo digo.</p>
+
+        <h4 data-i18n="sistemas_despues_h4">Qué pasa después de agendar</h4>
+        <ol class="pasos">
+          <li data-i18n="sistemas_despues_1">Te escucho.</li>
+          <li data-i18n="sistemas_despues_2">Te muestro qué automatizaría primero.</li>
+          <li data-i18n="sistemas_despues_3">Si tiene sentido, te mando una propuesta con alcance y plazo cerrados.</li>
         </ol>
       </div>
 
       <!-- Cómo se arma el presupuesto -->
-      <div class="bloque" id="legal-presupuesto">
+      <div class="bloque" id="sistemas-presupuesto">
         <h3 data-i18n="presupuesto_h3">Cómo se arma el presupuesto</h3>
-        <p data-i18n="legal_presupuesto_p">Depende de cuántos sistemas se implementan y de la complejidad de cada uno — por ejemplo, cuántos años de escritos hay disponibles para entrenar la voz de redacción. Se cotiza después del diagnóstico inicial, nunca antes.</p>
+        <p data-i18n="sistemas_presupuesto_p">Depende de cuántos sistemas se implementan y de la complejidad de cada uno — por ejemplo, cuántos años de escritos hay disponibles para entrenar la voz de redacción. Se cotiza después del diagnóstico inicial, nunca antes.</p>
       </div>
 
       <!-- FAQ -->
-      <div class="bloque faq" id="legal-faq">
+      <div class="bloque faq" id="sistemas-faq">
         <h3 data-i18n="faq_h3">Antes de escribirme</h3>
 
         <details>
-          <summary data-i18n="legal_faq_q1">¿Es seguro subir escritos y datos de mis clientes a estas herramientas?</summary>
-          <p data-i18n="legal_faq_a1">El sistema trabaja sobre las cuentas y herramientas que la organización ya controla. No subo información a plataformas de terceros para "entrenar" un modelo compartido con otros usuarios.</p>
+          <summary data-i18n="sistemas_faq_q1">¿Es seguro subir escritos y datos de mis clientes a estas herramientas?</summary>
+          <p data-i18n="sistemas_faq_a1">El sistema trabaja sobre las cuentas y herramientas que la organización ya controla. No subo información a plataformas de terceros para "entrenar" un modelo compartido con otros usuarios.</p>
         </details>
 
         <details>
-          <summary data-i18n="legal_faq_q2">¿Qué pasa si la IA se equivoca o "alucina" en un escrito o en un plazo?</summary>
-          <p data-i18n="legal_faq_a2">Ningún sistema presenta ni firma nada por su cuenta: siempre hay un humano revisando antes de que un escrito salga o un plazo se dé por cargado.</p>
+          <summary data-i18n="sistemas_faq_q2">¿Qué pasa si la IA se equivoca o "alucina" en un escrito o en un plazo?</summary>
+          <p data-i18n="sistemas_faq_a2">Ningún sistema presenta ni firma nada por su cuenta: siempre hay un humano revisando antes de que un escrito salga o un plazo se dé por cargado.</p>
         </details>
 
         <details>
-          <summary data-i18n="legal_faq_q3">¿Tengo que cambiar de programas o comprar licencias nuevas?</summary>
-          <p data-i18n="legal_faq_a3">No, salvo que lo que ya usan sea claramente insuficiente para lo que necesitan resolver. Se construye sobre lo que la organización ya tiene.</p>
+          <summary data-i18n="sistemas_faq_q3">¿Tengo que cambiar de programas o comprar licencias nuevas?</summary>
+          <p data-i18n="sistemas_faq_a3">No, salvo que lo que ya usan sea claramente insuficiente para lo que necesitan resolver. Se construye sobre lo que la organización ya tiene.</p>
         </details>
 
         <details>
-          <summary data-i18n="legal_faq_q4">¿Cuánto tiempo del equipo me va a consumir esto?</summary>
-          <p data-i18n="legal_faq_a4">Alrededor de 2 horas semanales de una persona de referencia durante la implementación de cada sistema.</p>
+          <summary data-i18n="sistemas_faq_q4">¿Cuánto tiempo del equipo me va a consumir esto?</summary>
+          <p data-i18n="sistemas_faq_a4">Alrededor de 2 horas semanales de una persona de referencia durante la implementación de cada sistema.</p>
         </details>
 
         <details>
-          <summary data-i18n="legal_faq_q5">¿Y si la organización crece o cambia de rubro?</summary>
-          <p data-i18n="legal_faq_a5">Los sistemas se arman de a uno y son modulares: se puede sumar un rubro o un tipo de expediente nuevo sin rehacer lo que ya funciona.</p>
+          <summary data-i18n="sistemas_faq_q5">¿Y si la organización crece o cambia de rubro?</summary>
+          <p data-i18n="sistemas_faq_a5">Los sistemas se arman de a uno y son modulares: se puede sumar un rubro o un tipo de expediente nuevo sin rehacer lo que ya funciona.</p>
         </details>
 
         <details>
-          <summary data-i18n="legal_faq_q6">¿Qué pasa si necesito ayuda después de que termine la implementación?</summary>
-          <p data-i18n="legal_faq_a6">Incluyo un período de soporte de ajuste post-implementación. El mantenimiento posterior se conversa aparte.</p>
+          <summary data-i18n="sistemas_faq_q6">¿Qué pasa si necesito ayuda después de que termine la implementación?</summary>
+          <p data-i18n="sistemas_faq_a6">Incluyo un período de soporte de ajuste post-implementación. El mantenimiento posterior se conversa aparte.</p>
+        </details>
+
+        <details>
+          <summary data-i18n="sistemas_faq_q7">Mi rubro no aparece en las demos. ¿Sirve igual?</summary>
+          <p data-i18n="sistemas_faq_a7">Sí — las demos muestran el problema que resuelven, no el rubro en el que se grabaron. Mirá la línea "Sirve también para" de cada tarjeta: casi todas se aplican a otros rubros con el mismo tipo de tarea repetitiva.</p>
+        </details>
+
+        <details>
+          <summary data-i18n="sistemas_faq_q8">¿De quién es lo que armás?</summary>
+          <p data-i18n="sistemas_faq_a8">Depende del sistema: algunos se entregan completos, con código y accesos, y podés seguir por tu cuenta o con otro proveedor. Otros se ofrecen como servicio con abono sobre una plantilla mía. Te digo cuál es cuál antes de empezar, no después.</p>
         </details>
       </div>
 
@@ -689,10 +850,10 @@ var i18n = {
     skip_link: "Saltar al contenido principal",
     header_buscar: "Buscar",
     ph_buscador: "Buscador de contenidos (Fase 12)",
-    hero_h1: "Sistemas de IA para tu organización, y asesoría técnica en comercio exterior y OMC.",
-    hero_subtitulo: "Dos formas distintas de ayudarte a recuperar horas de trabajo: diseño de sistemas que combinan herramientas de IA para automatizar tareas repetitivas y asesoría especializada en defensa comercial internacional. Elegí tu perfil.",
-    hero_tab_legal_titulo: "Estudios, consultoras y pymes",
-    hero_tab_legal_desc: "Sistemas de IA que sacan tareas repetitivas de encima — HITL, redacción, monitoreo, seguimiento de causas.",
+    hero_h1: "Sistemas de IA que automatizan tareas repetitivas, para convertir ese tiempo en más facturación o en tiempo libre.",
+    hero_subtitulo: "Dos formas de ayudarte: diseño sistemas que combinan herramientas de IA para tu pyme o tu práctica profesional, y asesoro en comercio exterior y OMC. Elegí tu perfil.",
+    hero_tab_sistemas_titulo: "Tengo una pyme o ejerzo una profesión",
+    hero_tab_sistemas_desc: "Sistemas de IA que sacan tareas repetitivas de encima — turnos, caja, stock, clientes, formularios, escritos.",
     hero_tab_omc_titulo: "Comercio exterior / OMC",
     hero_tab_omc_desc: "Capacitación y asesoría técnica en los tres acuerdos de defensa comercial de la OMC.",
     cta_agendar: "Agendá 20 minutos",
@@ -703,37 +864,57 @@ var i18n = {
     presupuesto_h3: "Cómo se arma el presupuesto",
     faq_h3: "Antes de escribirme",
 
-    legal_rotulo: "Perfil A",
-    legal_h2: "Sistemas de IA para estudios jurídicos, consultoras y pymes",
+    sistemas_rotulo: "Perfil A",
+    sistemas_h2: "Sistemas de IA para estudios jurídicos, consultoras y pymes",
     sobremi_h2: "Sobre mí",
     sobremi_cifra: "31 años",
     sobremi_resto: "detectando el error que hunde una investigación entera — primero en la defensa comercial internacional de la Argentina, hoy aplicados a auditar sistemas de IA. Diseño sistemas que le sacan a estudios jurídicos, consultoras y pymes las tareas repetitivas que no requieren criterio profesional, y asesoro en comercio exterior y OMC dentro de límites de incompatibilidad que declaro abiertamente.",
-    legal_presentacion_p: "Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.",
-    legal_si_p: "Un estudio de 2 a 8 abogados, una consultora de comercio exterior o una pyme donde el dueño todavía redacta a mano, revisa notificaciones a mano y busca el estado de un caso entre carpetas y WhatsApp.",
-    legal_no_h3: "No, si sos",
-    legal_no_p: "Un corporativo grande con área de IT propia, o buscás soporte técnico de software en general — esto es diseño de sistemas a medida, no una mesa de ayuda.",
-    legal_demo_h3: "Vela funcionar antes de hablar conmigo",
-    legal_demo_p: "Ejemplo del sistema de redacción en la voz propia: a partir de tres escritos anteriores del estudio, el sistema arma un primer borrador que ya suena como ese abogado escribe — no un texto genérico para reescribir entero.",
-    legal_autodiag_h3: "¿Cuánto tiempo estás perdiendo?",
-    legal_autodiag_p: "Un formulario corto sobre las tareas repetitivas del estudio o la consultora, que devuelve una estimación de horas semanales recuperables.",
-    ph_autodiag_legal: "Autodiagnóstico — Perfil A (Fase 13)",
-    legal_paso1: "Diagnóstico inicial de las tareas repetitivas del estudio o la consultora.",
-    legal_paso2: "Implementación de a un sistema por vez, empezando por el de mayor ahorro semanal.",
-    legal_paso3: "Capacitación breve al equipo para que lo pueda operar sin depender de mí.",
-    legal_paso4: "Período de ajuste con soporte, hasta que el sistema quede afinado.",
-    legal_presupuesto_p: "Depende de cuántos sistemas se implementan y de la complejidad de cada uno — por ejemplo, cuántos años de escritos hay disponibles para entrenar la voz de redacción. Se cotiza después del diagnóstico inicial, nunca antes.",
-    legal_faq_q1: "¿Es seguro subir escritos y datos de mis clientes a estas herramientas?",
-    legal_faq_a1: "El sistema trabaja sobre las cuentas y herramientas que la organización ya controla. No subo información a plataformas de terceros para \"entrenar\" un modelo compartido con otros usuarios.",
-    legal_faq_q2: "¿Qué pasa si la IA se equivoca o \"alucina\" en un escrito o en un plazo?",
-    legal_faq_a2: "Ningún sistema presenta ni firma nada por su cuenta: siempre hay un humano revisando antes de que un escrito salga o un plazo se dé por cargado.",
-    legal_faq_q3: "¿Tengo que cambiar de programas o comprar licencias nuevas?",
-    legal_faq_a3: "No, salvo que lo que ya usan sea claramente insuficiente para lo que necesitan resolver. Se construye sobre lo que la organización ya tiene.",
-    legal_faq_q4: "¿Cuánto tiempo del equipo me va a consumir esto?",
-    legal_faq_a4: "Alrededor de 2 horas semanales de una persona de referencia durante la implementación de cada sistema.",
-    legal_faq_q5: "¿Y si la organización crece o cambia de rubro?",
-    legal_faq_a5: "Los sistemas se arman de a uno y son modulares: se puede sumar un rubro o un tipo de expediente nuevo sin rehacer lo que ya funciona.",
-    legal_faq_q6: "¿Qué pasa si necesito ayuda después de que termine la implementación?",
-    legal_faq_a6: "Incluyo un período de soporte de ajuste post-implementación. El mantenimiento posterior se conversa aparte.",
+    sistemas_presentacion_p: "Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.",
+    sistemas_si_p: "Pymes y profesionales con tareas repetitivas que hoy les comen horas — turnos, caja, stock, seguimiento de clientes, formularios, presupuestos, escritos.",
+    sistemas_no_h3: "No, si sos",
+    sistemas_no_p: "Un corporativo grande con área de IT propia, o buscás soporte técnico de software en general — esto es diseño de sistemas a medida, no una mesa de ayuda.",
+    sistemas_demo_h3: "Vela funcionar antes de hablar conmigo",
+    sistemas_demo_p: "Ejemplo del sistema de redacción en la voz propia: a partir de tres escritos anteriores del estudio, el sistema arma un primer borrador que ya suena como ese abogado escribe — no un texto genérico para reescribir entero.",
+    sistemas_autodiag_h3: "¿Cuánto tiempo estás perdiendo?",
+    sistemas_autodiag_p: "Un formulario corto sobre las tareas repetitivas del estudio o la consultora, que devuelve una estimación de horas semanales recuperables.",
+    ph_autodiag_sistemas: "Autodiagnóstico — Perfil A (Fase 13)",
+    ph_galeria: "Galería de demos (Fase 5)",
+    galeria_aviso: "Demos construidas con datos ficticios para mostrar cómo funciona cada herramienta. La versión para tu negocio se arma con tus datos y tus herramientas.",
+    porque_h3: "Por qué trabajar conmigo",
+    porque_1_titulo: "Uso las herramientas que ya tenés",
+    porque_1_desc: "No hace falta migrar de sistema ni comprar licencias nuevas — el sistema se arma sobre lo que tu negocio ya usa.",
+    porque_2_titulo: "Nada sale de la IA sin revisión humana",
+    porque_2_desc: "Es mi oficio: trabajo como auditora HITL (Human-in-the-Loop), certificada por Anthropic en Claude Code, Agent Skills, Subagents y AI Fluency.",
+    porque_3_titulo: "Te explico qué es tuyo y qué no, antes de empezar",
+    porque_3_desc: "Algunos sistemas se entregan completos, con código y accesos; otros se ofrecen como servicio con abono sobre una plantilla mía. Te digo cuál es cuál antes de arrancar, no después.",
+    ph_porque: "Por qué trabajar conmigo (Fase 5.5)",
+    ph_calculadora: "Calculadora de horas liberadas (Fase 13)",
+    sistemas_paso1: "Diagnóstico inicial de las tareas repetitivas del estudio o la consultora.",
+    sistemas_paso2: "Implementación de a un sistema por vez, empezando por el de mayor ahorro semanal.",
+    sistemas_paso3: "Capacitación breve al equipo para que lo pueda operar sin depender de mí.",
+    sistemas_paso4: "Período de ajuste con soporte, hasta que el sistema quede afinado.",
+    sistemas_no_honesto: "Si en la charla vemos que todavía no te conviene automatizar nada, te lo digo.",
+    sistemas_despues_h4: "Qué pasa después de agendar",
+    sistemas_despues_1: "Te escucho.",
+    sistemas_despues_2: "Te muestro qué automatizaría primero.",
+    sistemas_despues_3: "Si tiene sentido, te mando una propuesta con alcance y plazo cerrados.",
+    sistemas_presupuesto_p: "Depende de cuántos sistemas se implementan y de la complejidad de cada uno — por ejemplo, cuántos años de escritos hay disponibles para entrenar la voz de redacción. Se cotiza después del diagnóstico inicial, nunca antes.",
+    sistemas_faq_q1: "¿Es seguro subir escritos y datos de mis clientes a estas herramientas?",
+    sistemas_faq_a1: "El sistema trabaja sobre las cuentas y herramientas que la organización ya controla. No subo información a plataformas de terceros para \"entrenar\" un modelo compartido con otros usuarios.",
+    sistemas_faq_q2: "¿Qué pasa si la IA se equivoca o \"alucina\" en un escrito o en un plazo?",
+    sistemas_faq_a2: "Ningún sistema presenta ni firma nada por su cuenta: siempre hay un humano revisando antes de que un escrito salga o un plazo se dé por cargado.",
+    sistemas_faq_q3: "¿Tengo que cambiar de programas o comprar licencias nuevas?",
+    sistemas_faq_a3: "No, salvo que lo que ya usan sea claramente insuficiente para lo que necesitan resolver. Se construye sobre lo que la organización ya tiene.",
+    sistemas_faq_q4: "¿Cuánto tiempo del equipo me va a consumir esto?",
+    sistemas_faq_a4: "Alrededor de 2 horas semanales de una persona de referencia durante la implementación de cada sistema.",
+    sistemas_faq_q5: "¿Y si la organización crece o cambia de rubro?",
+    sistemas_faq_a5: "Los sistemas se arman de a uno y son modulares: se puede sumar un rubro o un tipo de expediente nuevo sin rehacer lo que ya funciona.",
+    sistemas_faq_q6: "¿Qué pasa si necesito ayuda después de que termine la implementación?",
+    sistemas_faq_a6: "Incluyo un período de soporte de ajuste post-implementación. El mantenimiento posterior se conversa aparte.",
+    sistemas_faq_q7: "Mi rubro no aparece en las demos. ¿Sirve igual?",
+    sistemas_faq_a7: "Sí — las demos muestran el problema que resuelven, no el rubro en el que se grabaron. Mirá la línea \"Sirve también para\" de cada tarjeta: casi todas se aplican a otros rubros con el mismo tipo de tarea repetitiva.",
+    sistemas_faq_q8: "¿De quién es lo que armás?",
+    sistemas_faq_a8: "Depende del sistema: algunos se entregan completos, con código y accesos, y podés seguir por tu cuenta o con otro proveedor. Otros se ofrecen como servicio con abono sobre una plantilla mía. Te digo cuál es cuál antes de empezar, no después.",
 
     omc_rotulo: "Perfil B",
     omc_h2: "Comercio exterior / OMC",
@@ -779,10 +960,10 @@ var i18n = {
     skip_link: "Skip to main content",
     header_buscar: "Search",
     ph_buscador: "Content search (Phase 12)",
-    hero_h1: "AI systems for your organization, and technical advisory on international trade and WTO matters.",
-    hero_subtitulo: "Two different ways to help you win back hours of work: designing systems that combine AI tools to automate repetitive tasks, and specialized advisory on international trade defense. Choose your profile.",
-    hero_tab_legal_titulo: "Law firms, consultancies & small businesses",
-    hero_tab_legal_desc: "AI systems that take repetitive tasks off your plate — HITL, drafting, monitoring, case tracking.",
+    hero_h1: "AI systems that automate repetitive tasks, turning that time into more revenue or more free time.",
+    hero_subtitulo: "Two ways I can help: I design AI systems for your small business or professional practice, and I advise on international trade and WTO matters. Choose your profile.",
+    hero_tab_sistemas_titulo: "I run a small business or professional practice",
+    hero_tab_sistemas_desc: "AI systems that take repetitive tasks off your plate — bookings, cash register, stock, clients, forms, filings.",
     hero_tab_omc_titulo: "International Trade / WTO",
     hero_tab_omc_desc: "Training and technical advisory on the WTO's three trade defense agreements.",
     cta_agendar: "Book 20 minutes",
@@ -793,37 +974,57 @@ var i18n = {
     presupuesto_h3: "How the quote is built",
     faq_h3: "Before you get in touch",
 
-    legal_rotulo: "Profile A",
-    legal_h2: "AI systems for law firms, consultancies and small businesses",
+    sistemas_rotulo: "Profile A",
+    sistemas_h2: "AI systems for law firms, consultancies and small businesses",
     sobremi_h2: "About me",
     sobremi_cifra: "31 years",
     sobremi_resto: "of catching the single error that can sink an entire investigation — first in Argentina's international trade defense, now applied to auditing AI systems. I design systems that take repetitive, non-expert tasks off the plate of law firms, consultancies and small businesses, and advise on international trade and WTO matters within incompatibility limits I disclose upfront.",
-    legal_presentacion_p: "I design and implement AI systems that give boutique law firms, consultancies and small businesses back hours every week — already validated with a real Buenos Aires firm.",
-    legal_si_p: "A firm with 2 to 8 lawyers, a trade consultancy, or a small business where the owner still drafts documents by hand, checks notifications by hand, and hunts for a case's status across folders and WhatsApp.",
-    legal_no_h3: "No, if you are",
-    legal_no_p: "A large corporation with its own IT department, or you're looking for general software support — this is custom systems design, not a help desk.",
-    legal_demo_h3: "See it work before you talk to me",
-    legal_demo_p: "Example of the drafting-in-your-own-voice system: starting from three of the firm's past filings, the system produces a first draft that already sounds like that lawyer writes — not a generic text to rewrite from scratch.",
-    legal_autodiag_h3: "How much time are you losing?",
-    legal_autodiag_p: "A short form about the firm's or consultancy's repetitive tasks, returning an estimate of recoverable hours per week.",
-    ph_autodiag_legal: "Self-assessment — Profile A (Phase 13)",
-    legal_paso1: "Initial diagnosis of the firm's or consultancy's repetitive tasks.",
-    legal_paso2: "Implementation one system at a time, starting with the one that saves the most hours per week.",
-    legal_paso3: "Brief training for the team so they can run it without depending on me.",
-    legal_paso4: "A supported adjustment period, until the system is fully tuned.",
-    legal_presupuesto_p: "It depends on how many systems get implemented and how complex each one is — for example, how many years of past filings are available to train the drafting voice. It's quoted after the initial diagnosis, never before.",
-    legal_faq_q1: "Is it safe to upload my clients' filings and data to these tools?",
-    legal_faq_a1: "The system runs on the accounts and tools your organization already controls. I don't upload information to third-party platforms to \"train\" a model shared with other users.",
-    legal_faq_q2: "What happens if the AI makes a mistake or \"hallucinates\" in a filing or a deadline?",
-    legal_faq_a2: "No system files or signs anything on its own: there's always a human reviewing before a document goes out or a deadline gets logged.",
-    legal_faq_q3: "Do I have to switch software or buy new licenses?",
-    legal_faq_a3: "No, unless what you're already using clearly falls short of what you need. It's built on top of what your organization already has.",
-    legal_faq_q4: "How much of the team's time will this take?",
-    legal_faq_a4: "About 2 hours a week from one point-of-contact person during each system's implementation.",
-    legal_faq_q5: "What if the organization grows or changes its line of work?",
-    legal_faq_a5: "Systems are built one at a time and are modular: you can add a new practice area or case type without redoing what already works.",
-    legal_faq_q6: "What happens if I need help after the implementation is done?",
-    legal_faq_a6: "I include a post-implementation adjustment support period. Ongoing maintenance is discussed separately.",
+    sistemas_presentacion_p: "I design and implement AI systems that give boutique law firms, consultancies and small businesses back hours every week — already validated with a real Buenos Aires firm.",
+    sistemas_si_p: "Small businesses and professionals with repetitive tasks eating up their hours — bookings, cash register, stock, client follow-up, forms, quotes, filings.",
+    sistemas_no_h3: "No, if you are",
+    sistemas_no_p: "A large corporation with its own IT department, or you're looking for general software support — this is custom systems design, not a help desk.",
+    sistemas_demo_h3: "See it work before you talk to me",
+    sistemas_demo_p: "Example of the drafting-in-your-own-voice system: starting from three of the firm's past filings, the system produces a first draft that already sounds like that lawyer writes — not a generic text to rewrite from scratch.",
+    sistemas_autodiag_h3: "How much time are you losing?",
+    sistemas_autodiag_p: "A short form about the firm's or consultancy's repetitive tasks, returning an estimate of recoverable hours per week.",
+    ph_autodiag_sistemas: "Self-assessment — Profile A (Phase 13)",
+    ph_galeria: "Demo gallery (Phase 5)",
+    galeria_aviso: "Demos built with fictional data to show how each tool works. Your version gets built with your own data and tools.",
+    porque_h3: "Why work with me",
+    porque_1_titulo: "I use the tools you already have",
+    porque_1_desc: "No need to switch systems or buy new licenses — everything is built on top of what your business already uses.",
+    porque_2_titulo: "Nothing goes out from AI without human review",
+    porque_2_desc: "It's my trade: I work as a HITL (Human-in-the-Loop) auditor, certified by Anthropic in Claude Code, Agent Skills, Subagents and AI Fluency.",
+    porque_3_titulo: "I tell you what's yours and what isn't, before we start",
+    porque_3_desc: "Some systems are delivered in full, with code and access; others are offered as a subscription service on top of a template of mine. I tell you which is which before we begin, not after.",
+    ph_porque: "Why work with me (Phase 5.5)",
+    ph_calculadora: "Time-saved calculator (Phase 13)",
+    sistemas_paso1: "Initial diagnosis of the firm's or consultancy's repetitive tasks.",
+    sistemas_paso2: "Implementation one system at a time, starting with the one that saves the most hours per week.",
+    sistemas_paso3: "Brief training for the team so they can run it without depending on me.",
+    sistemas_paso4: "A supported adjustment period, until the system is fully tuned.",
+    sistemas_no_honesto: "If in our conversation we see that automating isn't the right move for you yet, I'll tell you.",
+    sistemas_despues_h4: "What happens after you book",
+    sistemas_despues_1: "I listen.",
+    sistemas_despues_2: "I show you what I'd automate first.",
+    sistemas_despues_3: "If it makes sense, I send you a proposal with a fixed scope and timeline.",
+    sistemas_presupuesto_p: "It depends on how many systems get implemented and how complex each one is — for example, how many years of past filings are available to train the drafting voice. It's quoted after the initial diagnosis, never before.",
+    sistemas_faq_q1: "Is it safe to upload my clients' filings and data to these tools?",
+    sistemas_faq_a1: "The system runs on the accounts and tools your organization already controls. I don't upload information to third-party platforms to \"train\" a model shared with other users.",
+    sistemas_faq_q2: "What happens if the AI makes a mistake or \"hallucinates\" in a filing or a deadline?",
+    sistemas_faq_a2: "No system files or signs anything on its own: there's always a human reviewing before a document goes out or a deadline gets logged.",
+    sistemas_faq_q3: "Do I have to switch software or buy new licenses?",
+    sistemas_faq_a3: "No, unless what you're already using clearly falls short of what you need. It's built on top of what your organization already has.",
+    sistemas_faq_q4: "How much of the team's time will this take?",
+    sistemas_faq_a4: "About 2 hours a week from one point-of-contact person during each system's implementation.",
+    sistemas_faq_q5: "What if the organization grows or changes its line of work?",
+    sistemas_faq_a5: "Systems are built one at a time and are modular: you can add a new practice area or case type without redoing what already works.",
+    sistemas_faq_q6: "What happens if I need help after the implementation is done?",
+    sistemas_faq_a6: "I include a post-implementation adjustment support period. Ongoing maintenance is discussed separately.",
+    sistemas_faq_q7: "My type of business isn't in the demos. Does it still work?",
+    sistemas_faq_a7: "Yes — the demos show the problem they solve, not the industry they were filmed in. Check the \"Also works for\" line on each card: almost all of them apply to other businesses with the same kind of repetitive task.",
+    sistemas_faq_q8: "Who owns what you build?",
+    sistemas_faq_a8: "It depends on the system: some are delivered in full, with code and access, and you can continue on your own or with another provider. Others are offered as a subscription service on top of a template of mine. I tell you which is which before we start, not after.",
 
     omc_rotulo: "Profile B",
     omc_h2: "International Trade / WTO",
@@ -905,6 +1106,14 @@ function aplicarIdioma(lang) {
 
   // Botón de idioma: resalta cuando el inglés está activo
   document.getElementById('btn-idioma').setAttribute('aria-pressed', String(lang === 'en'));
+
+  // Fase 5 (v5): la galería de demos genera su HTML por JS, no con
+  // data-i18n — hay que volver a dibujarla cuando cambia el idioma.
+  // catalogoDemos existe como función hoisteada desde el principio, pero
+  // sus DATOS (más abajo en el archivo) recién se asignan cuando el
+  // script llega a esa línea — por eso se chequea la variable de datos,
+  // no solo la función, para no redibujar antes de tiempo.
+  if (typeof catalogoDemos !== 'undefined' && typeof renderGaleria === 'function') renderGaleria();
 }
 
 function fijarIdioma(lang) {
@@ -948,7 +1157,7 @@ btnBuscar.addEventListener('click', function () {
 // Selector de perfil: marca como "activo" el tab correspondiente
 // a la sección visible (mejora de usabilidad, no imprescindible).
 var tabs = document.querySelectorAll('.tab-perfil');
-var secciones = ['legal', 'omc'].map(function (id) { return document.getElementById(id); });
+var secciones = ['sistemas', 'omc'].map(function (id) { return document.getElementById(id); });
 if ('IntersectionObserver' in window) {
   var observador = new IntersectionObserver(function (entradas) {
     entradas.forEach(function (entrada) {
@@ -985,6 +1194,205 @@ modalCalendario.addEventListener('click', function (evento) {
 document.addEventListener('keydown', function (evento) {
   if (evento.key === 'Escape' && !modalCalendario.hidden) cerrarModalCalendario();
 });
+
+/* ============================================================
+   FASE 5 (v5) — GALERÍA DE DEMOS
+   Los videoId están vacíos a propósito: hasta que subas los 14
+   videos a YouTube como "no listados" y pegues cada ID acá, cada
+   tarjeta muestra un recuadro "video pendiente" en vez de romperse.
+   Buscá VIDEO_ID_AQUI en este archivo para completarlos.
+   ============================================================ */
+var demoDestacada = {
+  videoId: '', // VIDEO_ID_AQUI — turnero médico
+  titulo: { es: 'Turnos online con historia clínica', en: 'Online appointments with medical records' },
+  desc: { es: 'Reserva de turnos y acceso a la historia clínica, todo online.', en: 'Appointment booking and medical record access, all online.' }
+};
+
+var catalogoDemos = [
+  { id: 'whatsapp-turnos', filtro: 'agenda', videoId: '',
+    titulo: { es: 'Turnos por WhatsApp sin atender el teléfono', en: 'WhatsApp bookings without answering the phone' },
+    problema: { es: 'El teléfono no para de sonar solo para agendar un turno.', en: "The phone won't stop ringing just to book an appointment." },
+    tarea: { es: 'Atender llamadas para anotar un turno a mano.', en: 'Answering calls to write down a booking by hand.' },
+    sirve: { es: 'Cualquier servicio con turno', en: 'Any appointment-based service' } },
+  { id: 'no-show', filtro: 'agenda', videoId: '',
+    titulo: { es: 'Menos ausencias a los turnos', en: 'Fewer missed appointments' },
+    problema: { es: 'Los clientes faltan sin avisar y se pierde el horario.', en: 'Clients no-show without notice and the slot goes to waste.' },
+    tarea: { es: 'Llamar uno por uno para recordar el turno.', en: "Calling each client to remind them of their appointment." },
+    sirve: { es: 'Consultorios, estudios, talleres', en: 'Clinics, studios, workshops' } },
+  { id: 'reservas-dia', filtro: 'agenda', videoId: '',
+    titulo: { es: 'Reservas del día ordenadas en una sola vista', en: "The day's bookings organized in one view" },
+    problema: { es: 'Las reservas llegan por distintos canales y se pierden.', en: 'Bookings come in through different channels and get lost.' },
+    tarea: { es: 'Juntar a mano reservas de WhatsApp, mail y teléfono.', en: 'Manually gathering bookings from WhatsApp, email and phone.' },
+    sirve: { es: 'Alojamientos, alquileres, clases', en: 'Lodging, rentals, classes' } },
+  { id: 'cierre-caja', filtro: 'caja', videoId: '',
+    titulo: { es: 'Cierre de caja guiado paso a paso', en: 'Step-by-step guided cash closing' },
+    problema: { es: 'El cierre de caja se hace distinto cada día y no cierra.', en: "Cash closing is done differently each day and doesn't add up." },
+    tarea: { es: 'Sumar y controlar la caja a mano al final del día.', en: "Manually adding up and checking the register at day's end." },
+    sirve: { es: 'Cualquier comercio con caja diaria', en: 'Any business with a daily register' } },
+  { id: 'comisiones', filtro: 'caja', videoId: '',
+    titulo: { es: 'Liquidación de comisiones por profesional', en: 'Per-professional commission payouts' },
+    problema: { es: 'Calcular cuánto le corresponde a cada uno lleva horas.', en: 'Figuring out what each person is owed takes hours.' },
+    tarea: { es: 'Armar la planilla de comisiones a mano cada mes.', en: 'Building the commission spreadsheet by hand every month.' },
+    sirve: { es: 'Inmobiliarias, equipos de venta, consultorios compartidos', en: 'Real estate agencies, sales teams, shared practices' } },
+  { id: 'stock-vencimiento', filtro: 'stock', videoId: '',
+    titulo: { es: 'Stock con aviso de vencimientos', en: 'Stock with expiration alerts' },
+    problema: { es: 'Un producto vence sin que nadie se dé cuenta a tiempo.', en: 'A product expires before anyone notices in time.' },
+    tarea: { es: 'Revisar fechas de vencimiento producto por producto.', en: 'Checking expiration dates product by product.' },
+    sirve: { es: 'Dietéticas, farmacias, almacenes', en: 'Health stores, pharmacies, grocers' } },
+  { id: 'pedido-dia', filtro: 'clientes', videoId: '',
+    titulo: { es: 'Pedidos de comida con acceso a countries, sin pagarle a una app', en: 'Food orders with gated-community access, no app fees' },
+    problema: { es: 'Los pedidos de zonas cerradas se pierden entre el ingreso al country y la app de delivery.', en: 'Orders from gated neighborhoods get lost between gate access and the delivery app.' },
+    tarea: { es: 'Coordinar a mano el ingreso al country y anotar el pedido.', en: 'Manually coordinating gate access and writing down the order.' },
+    sirve: { es: 'Kioscos, rotiserías, farmacias y veterinarias con envío en zonas cerradas', en: 'Kiosks, delis, pharmacies and vets delivering to gated communities' } },
+  { id: 'costos-restaurantes', filtro: 'costos', videoId: '',
+    titulo: { es: 'Costo real de cada producto y su margen', en: 'The real cost of each product and its margin' },
+    problema: { es: 'No se sabe si un plato deja ganancia hasta que es tarde.', en: "You don't know if a dish is profitable until it's too late." },
+    tarea: { es: 'Calcular el costo de cada receta a mano.', en: "Calculating each recipe's cost by hand." },
+    sirve: { es: 'Panaderías, emprendimientos de producción', en: 'Bakeries, small production businesses' } },
+  { id: 'presupuesto-evento', filtro: 'costos', videoId: '',
+    titulo: { es: 'Presupuestos para eventos armados en minutos', en: 'Event quotes put together in minutes' },
+    problema: { es: 'Cada presupuesto de evento se arma desde cero.', en: 'Every event quote gets built from scratch.' },
+    tarea: { es: 'Escribir el presupuesto a mano para cada consulta.', en: 'Writing out the quote by hand for every inquiry.' },
+    sirve: { es: 'Catering, fotografía, salones, organizadores', en: 'Catering, photography, venues, event planners' } },
+  { id: 'seguimiento-cliente', filtro: 'clientes', videoId: '',
+    titulo: { es: 'Recordatorio automático para que el cliente vuelva', en: 'Automatic reminder to bring clients back' },
+    problema: { es: 'El cliente se olvida de volver y no lo sabés hasta que ya se fue a otro lado.', en: "Clients forget to come back and you don't notice until they've gone elsewhere." },
+    tarea: { es: 'Acordarte vos misma de escribirle a cada cliente.', en: 'Remembering yourself to message each client.' },
+    sirve: { es: 'Cualquier servicio con clientela recurrente', en: 'Any business with repeat clients' } },
+  { id: 'ficha-unificada', filtro: 'clientes', videoId: '',
+    titulo: { es: 'Toda la información del cliente en una ficha', en: 'All client information in one record' },
+    problema: { es: 'Los datos de un cliente están repartidos en varios lados.', en: "A client's info is scattered across several places." },
+    tarea: { es: 'Buscar en distintas planillas o cuadernos para armar el historial.', en: 'Digging through different spreadsheets or notebooks to piece together the history.' },
+    sirve: { es: 'Estudios, consultorios, gimnasios', en: 'Firms, clinics, gyms' } },
+  { id: 'consentimiento', filtro: 'documentos', videoId: '',
+    titulo: { es: 'Consentimientos y formularios sin papel', en: 'Consent forms without paper' },
+    problema: { es: 'El papel del consentimiento se pierde o queda sin firmar.', en: 'Paper consent forms get lost or go unsigned.' },
+    tarea: { es: 'Imprimir, hacer firmar y archivar el papel a mano.', en: 'Printing, getting it signed, and filing the paper by hand.' },
+    sirve: { es: 'Estudios jurídicos, consultorios, tatuadores', en: 'Law firms, clinics, tattoo studios' } },
+  { id: 'carta-digital', filtro: 'documentos', videoId: '',
+    titulo: { es: 'Un precio cambia una vez y se actualiza en el menú QR, WhatsApp y redes', en: 'Change a price once and it updates on the QR menu, WhatsApp and social' },
+    problema: { es: 'Un precio cambia y hay que actualizarlo a mano en cinco lugares distintos.', en: 'A price changes and has to be manually updated in five different places.' },
+    tarea: { es: 'Editar el menú QR, el catálogo de WhatsApp y las redes uno por uno.', en: 'Editing the QR menu, WhatsApp catalog and social media one by one.' },
+    sirve: { es: 'Catálogos y cartas de cualquier comercio', en: 'Catalogs and menus for any business' } },
+  { id: 'redactor-escritos', filtro: 'documentos', videoId: '',
+    titulo: { es: 'Primer borrador de un escrito en tu propia voz', en: "A filing's first draft in your own voice" },
+    problema: { es: 'Empezar un escrito de cero desde la hoja en blanco.', en: 'Starting a filing from a blank page.' },
+    tarea: { es: 'Redactar el primer borrador de cada escrito a mano.', en: "Drafting each filing's first version by hand." },
+    sirve: { es: 'Estudios jurídicos, estudios contables, consultoras', en: 'Law firms, accounting firms, consultancies' } },
+  { id: 'demanda-nueva', filtro: 'documentos', videoId: '',
+    titulo: { es: 'Demandas nuevas procesadas sin transcribir nada a mano', en: 'New filings processed without retyping anything by hand' },
+    problema: { es: 'Una demanda nueva llega y hay que leerla entera para sacar hechos y plazos.', en: 'A new filing comes in and someone has to read it all just to pull out facts and deadlines.' },
+    tarea: { es: 'Leer la demanda, calcular los plazos y cargarla a mano en la base.', en: 'Reading the filing, calculating deadlines, and entering it into the database by hand.' },
+    sirve: { es: 'Estudios jurídicos, estudios contables, consultoras con expedientes', en: 'Law firms, accounting firms, consultancies handling case files' } }
+];
+
+var filtrosGaleria = [
+  { id: 'todas', es: 'Todas', en: 'All' },
+  { id: 'agenda', es: 'Agenda y turnos', en: 'Scheduling & bookings' },
+  { id: 'caja', es: 'Caja, cobros y comisiones', en: 'Register, payments & commissions' },
+  { id: 'stock', es: 'Stock y compras', en: 'Stock & purchasing' },
+  { id: 'costos', es: 'Costos y presupuestos', en: 'Costs & quotes' },
+  { id: 'clientes', es: 'Clientes y seguimiento', en: 'Clients & follow-up' },
+  { id: 'documentos', es: 'Documentos y formularios', en: 'Documents & forms' }
+];
+
+var filtroActivo = 'todas';
+var verTodasDemos = false;
+
+function idiomaActualGaleria() { return document.documentElement.lang === 'en' ? 'en' : 'es'; }
+
+function marcoVideoHTML(videoId, tituloAlt, pendienteTexto) {
+  if (videoId) {
+    return '<button class="demo-marco" data-video-id="' + videoId + '" aria-label="' + tituloAlt + '">' +
+      '<img src="https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg" alt="">' +
+      '<span class="demo-marco__play"></span></button>';
+  }
+  return '<div class="demo-marco demo-marco--vacio" data-pendiente="' + pendienteTexto + '"></div>';
+}
+
+function renderDestacada() {
+  var lang = idiomaActualGaleria();
+  var pendiente = lang === 'en' ? 'Video pending' : 'Video pendiente';
+  var etiqueta = lang === 'en' ? 'Featured' : 'Destacada';
+  document.getElementById('demo-destacada').innerHTML =
+    '<span class="demo-destacada__etiqueta">' + etiqueta + '</span>' +
+    marcoVideoHTML(demoDestacada.videoId, demoDestacada.titulo[lang], pendiente) +
+    '<h3 class="demo-destacada__titulo">' + demoDestacada.titulo[lang] + '</h3>' +
+    '<p>' + demoDestacada.desc[lang] + '</p>';
+}
+
+function renderFiltros() {
+  var lang = idiomaActualGaleria();
+  var cont = document.getElementById('galeria-filtros');
+  cont.innerHTML = filtrosGaleria.map(function (f) {
+    var activo = f.id === filtroActivo ? ' activo' : '';
+    return '<button class="filtro-pill' + activo + '" data-filtro="' + f.id + '">' + f[lang] + '</button>';
+  }).join('');
+}
+
+function renderGrid() {
+  var lang = idiomaActualGaleria();
+  var pendiente = lang === 'en' ? 'Video pending' : 'Video pendiente';
+  var tareaLabel = lang === 'en' ? 'Task it replaces:' : 'Tarea que reemplaza:';
+  var sirveLabel = lang === 'en' ? 'Also works for:' : 'Sirve también para:';
+  var verMasLabel = lang === 'en' ? 'See all' : 'Ver todas';
+  var verMenosLabel = lang === 'en' ? 'See fewer' : 'Ver menos';
+
+  var filtradas = catalogoDemos.filter(function (d) { return filtroActivo === 'todas' || d.filtro === filtroActivo; });
+  var mostrar = verTodasDemos ? filtradas : filtradas.slice(0, 6);
+
+  document.getElementById('galeria-grid').innerHTML = mostrar.map(function (d) {
+    var etiquetaFiltro = filtrosGaleria.filter(function (f) { return f.id === d.filtro; })[0];
+    return '<article class="demo-card">' +
+      marcoVideoHTML(d.videoId, d.titulo[lang], pendiente) +
+      '<div class="demo-card__cuerpo">' +
+        '<div class="demo-card__etiqueta">' + (etiquetaFiltro ? etiquetaFiltro[lang] : '') + '</div>' +
+        '<h4 class="demo-card__titulo">' + d.titulo[lang] + '</h4>' +
+        '<p class="demo-card__problema">' + d.problema[lang] + '</p>' +
+        '<p class="demo-card__meta"><strong>' + tareaLabel + '</strong> ' + d.tarea[lang] + '</p>' +
+        '<p class="demo-card__meta"><strong>' + sirveLabel + '</strong> ' + d.sirve[lang] + '</p>' +
+      '</div></article>';
+  }).join('');
+
+  var btn = document.getElementById('btn-ver-todas-demos');
+  if (filtradas.length > 6) {
+    btn.hidden = false;
+    btn.textContent = verTodasDemos ? verMenosLabel : verMasLabel;
+  } else {
+    btn.hidden = true;
+  }
+}
+
+function renderGaleria() {
+  renderDestacada();
+  renderFiltros();
+  renderGrid();
+}
+
+// Delegación de eventos: filtros, ver todas, y reproducir video al tocar una miniatura
+document.addEventListener('click', function (evento) {
+  var pillFiltro = evento.target.closest('.filtro-pill');
+  if (pillFiltro) {
+    filtroActivo = pillFiltro.getAttribute('data-filtro');
+    verTodasDemos = false;
+    renderFiltros();
+    renderGrid();
+    return;
+  }
+  if (evento.target.id === 'btn-ver-todas-demos') {
+    verTodasDemos = !verTodasDemos;
+    renderGrid();
+    return;
+  }
+  var marco = evento.target.closest('.demo-marco[data-video-id]');
+  if (marco) {
+    var id = marco.getAttribute('data-video-id');
+    marco.outerHTML = '<div class="demo-marco"><iframe src="https://www.youtube.com/embed/' + id +
+      '?autoplay=1" title="demo" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
+  }
+});
+
+renderGaleria();
 </script>
 
 </body>
