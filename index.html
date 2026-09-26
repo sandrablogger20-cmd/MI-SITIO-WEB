@@ -806,7 +806,7 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <div class="bloque" id="omc-papers">
         <h3 data-i18n="omc_papers_h3">Análisis publicados</h3>
         <ul class="omc-papers-lista">
-          <li><a href="https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu" target="_blank" rel="noopener" data-i18n="omc_paper_ds616">Los subsidios transnacionales ante la OMC: el caso DS616 (acero inoxidable, Indonesia)</a></li>
+          <li><a href="https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu" id="link-ds616" target="_blank" rel="noopener" data-i18n="omc_paper_ds616">Los subsidios transnacionales ante la OMC: el caso DS616 (acero inoxidable, Indonesia)</a></li>
           <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ds630-the-case-that-will-rewrite-scm-agreement-activity-7471171476331585537-OxYF" target="_blank" rel="noopener" data-i18n="omc_paper_china">China impugna 30 artículos del Acuerdo SMC (DS630)</a></li>
           <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_us-section-232-vs-sg-activity-7463253196451430400-7Qvi" target="_blank" rel="noopener" data-i18n="omc_paper_232">Sección 232: aranceles de EE.UU. y la parálisis del Órgano de Apelación</a></li>
         </ul>
@@ -1249,6 +1249,16 @@ function aplicarIdioma(lang) {
 
   // Botón de idioma: resalta cuando el inglés está activo
   document.getElementById('btn-idioma').setAttribute('aria-pressed', String(lang === 'en'));
+
+  // Análisis del DS616: en inglés, salta directo a donde arranca esa
+  // versión dentro del artículo (el documento tiene las dos completas,
+  // español primero); en español, va al principio del artículo.
+  var linkDs616 = document.getElementById('link-ds616');
+  if (linkDs616) {
+    linkDs616.href = lang === 'en'
+      ? 'https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu#version-en'
+      : 'https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu';
+  }
 
   // Fase 5 (v5): la galería de demos genera su HTML por JS, no con
   // data-i18n — hay que volver a dibujarla cuando cambia el idioma.
@@ -1778,7 +1788,7 @@ var posts = [
     link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ds630-the-case-that-will-rewrite-scm-agreement-activity-7471171476331585537-OxYF' },
   { titulo: { es: 'Los subsidios transnacionales ante la OMC: el caso DS616 (acero inoxidable, Indonesia)', en: 'Transnational subsidies before the WTO: the DS616 case (Indonesian stainless steel)' },
     resumen: { es: 'Análisis del informe del Grupo Especial en DS616 sobre si un Miembro de la OMC puede compensar subsidios de otro país, y por qué la parálisis del Órgano de Apelación deja la pregunta sin resolver.', en: "Analysis of the DS616 panel report on whether a WTO Member can impose countervailing duties on another country's subsidies, and why the Appellate Body's paralysis leaves the question unresolved." },
-    link: 'https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu' },
+    link: 'https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu', link_en: 'https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu#version-en' },
   { titulo: { es: 'El costo invisible de saltear el HITL experto', en: 'The invisible cost of skipping expert HITL' },
     resumen: { es: 'Saltear la revisión humana experta parece un ahorro, hasta que la factura llega por otro lado: retrabajo, daño reputacional, exposición regulatoria.', en: 'Skipping expert HITL looks like savings until the bill arrives in a different budget line: rework, reputational damage, regulatory exposure.' },
     link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_the-cost-of-skipping-expert-hitl-activity-7469557656840564736-JgiH' },
@@ -1812,7 +1822,8 @@ function indiceBuscador() {
     return { titulo: d.titulo[lang], resumen: d.sirve[lang], link: '#sistemas-galeria' };
   });
   var dePosts = posts.map(function (p) {
-    return { titulo: p.titulo[lang], resumen: p.resumen[lang], link: p.link };
+    var link = (lang === 'en' && p.link_en) ? p.link_en : p.link;
+    return { titulo: p.titulo[lang], resumen: p.resumen[lang], link: link };
   });
   return dePosts.concat(deDemos);
 }
