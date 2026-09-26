@@ -534,6 +534,11 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 .buscador-item__titulo { font-family: var(--font-titulos); font-weight: 600; color: var(--teal-dark); font-size: .95rem; }
 .buscador-item__resumen { font-size: .85rem; color: var(--navy); margin-top: 2px; }
 .buscador-vacio { color: rgba(var(--blanco-rgb), .7); font-size: .9rem; padding: 8px 0; }
+
+.omc-papers-lista { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.omc-papers-lista li { border-left: 3px solid var(--magenta); padding: 6px 0 6px 14px; }
+.omc-papers-lista a { font-family: var(--font-titulos); font-weight: 600; text-decoration: none; }
+.omc-papers-lista a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -624,6 +629,29 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <div class="bloque" id="sistemas-presentacion">
         <h3 data-i18n="presentacion_h3">Quién soy / a quién ayudo</h3>
         <p data-i18n="sistemas_presentacion_p">Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.</p>
+      </div>
+
+      <!-- Casos y publicaciones -->
+      <div class="bloque" id="sistemas-papers">
+        <h3 data-i18n="sistemas_papers_h3">Casos y publicaciones</h3>
+        <ul class="omc-papers-lista">
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_recuper%C3%A1-horas-activity-7500525753294393344-rK1_" target="_blank" rel="noopener" data-i18n="post_1">Recuperá horas de tu tiempo experto sin resignar el control (fútbol/VAR)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_el-chef-y-su-equipo-activity-7501614569094668288-ro-J" target="_blank" rel="noopener" data-i18n="post_2">30 años buscando la palabra que cambia todo un párrafo (chef y brigada)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hay-algo-que-se-fuga-en-tu-estudio-y-no-activity-7503060314234609664-_9R-" target="_blank" rel="noopener" data-i18n="post_3">Bañera y plata</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_detectar-lo-que-no-cierra-activity-7503784870893084672-epj2" target="_blank" rel="noopener" data-i18n="post_4">Detectar lo que no cierra (metáfora del truco)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_mismo-caso-mismos-hechos-dos-redacciones-activity-7504148570665689089-qkv6" target="_blank" rel="noopener" data-i18n="post_5">Agente 1 — redactar escritos a mano (testimonial)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-fluency-activity-7505596752243343360-5eSC" target="_blank" rel="noopener" data-i18n="post_6">Diseño con base en AI Fluency ("Vos aportás. La IA aporta.")</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_en-tribunales-un-d%C3%ADa-de-diferencia-no-es-activity-7506330293096611840-trrc" target="_blank" rel="noopener" data-i18n="post_7">Agente 2 — cargar demandas (testimonial)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_por-qu%C3%A9-inventa-activity-7508138788414648320--Czd" target="_blank" rel="noopener" data-i18n="post_8">¿Por qué inventa?</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hasta-ac%C3%A1-mis-posts-hablaban-de-estudios-activity-7508870822539714560-gZiL" target="_blank" rel="noopener" data-i18n="post_9">Demo: turnos médicos por WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_the-cost-of-skipping-expert-hitl-activity-7469557656840564736-JgiH" target="_blank" rel="noopener" data-i18n="post_10">El costo invisible de saltear el HITL experto</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-legal-liability-activity-7467549607766536193-O6cJ" target="_blank" rel="noopener" data-i18n="post_11">Responsabilidad legal por IA</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-doesnt-hallucinate-less-activity-7462143693387554817-OEtY" target="_blank" rel="noopener" data-i18n="post_12">La IA no alucina menos, alucina distinto</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hitl-which-level-is-your-pipeline-at-activity-7465361960847663106-pcyT" target="_blank" rel="noopener" data-i18n="post_13">¿En qué nivel está tu proceso de HITL?</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_legal-precision-in-the-age-of-ai-activity-7457014549117009922-7cz8" target="_blank" rel="noopener" data-i18n="post_14">Auditora legal de IA</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ia-aliada-o-riesgo-reputacional-activity-7445134298799677440-xnlv" target="_blank" rel="noopener" data-i18n="post_15">La IA es un copiloto, no un capitán</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-creates-the-draft-your-judgment-earns-activity-7452670054837522432-CTO-" target="_blank" rel="noopener" data-i18n="post_16">La IA hace el borrador. Tu criterio cobra el extra.</a></li>
+        </ul>
       </div>
 
       <!-- Para quién sí / no -->
@@ -772,6 +800,16 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <div class="bloque" id="omc-presentacion">
         <h3 data-i18n="presentacion_h3">Quién soy / a quién ayudo</h3>
         <p data-i18n="omc_presentacion_p">Capacitación y asesoría técnica en los tres acuerdos de defensa comercial de la OMC, para exportadores argentinos, empresas extranjeras y consultoras de comercio exterior.</p>
+      </div>
+
+      <!-- Análisis publicados -->
+      <div class="bloque" id="omc-papers">
+        <h3 data-i18n="omc_papers_h3">Análisis publicados</h3>
+        <ul class="omc-papers-lista">
+          <li><a href="https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu" target="_blank" rel="noopener" data-i18n="omc_paper_ds616">Los subsidios transnacionales ante la OMC: el caso DS616 (acero inoxidable, Indonesia)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ds630-the-case-that-will-rewrite-scm-agreement-activity-7471171476331585537-OxYF" target="_blank" rel="noopener" data-i18n="omc_paper_china">China impugna 30 artículos del Acuerdo SMC (DS630)</a></li>
+          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_us-section-232-vs-sg-activity-7463253196451430400-7Qvi" target="_blank" rel="noopener" data-i18n="omc_paper_232">Sección 232: aranceles de EE.UU. y la parálisis del Órgano de Apelación</a></li>
+        </ul>
       </div>
 
       <!-- Para quién sí / no -->
@@ -933,6 +971,23 @@ var i18n = {
     sobremi_cifra: "31 años",
     sobremi_resto: "detectando el error que hunde una investigación entera — primero en la defensa comercial internacional de la Argentina, hoy aplicados a auditar sistemas de IA. Diseño sistemas que le sacan a estudios jurídicos, consultoras y pymes las tareas repetitivas que no requieren criterio profesional, y asesoro en comercio exterior y OMC dentro de límites de incompatibilidad que declaro abiertamente.",
     sistemas_presentacion_p: "Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.",
+    sistemas_papers_h3: "Casos y publicaciones",
+    post_1: "Recuperá horas de tu tiempo experto sin resignar el control (fútbol/VAR)",
+    post_2: "30 años buscando la palabra que cambia todo un párrafo (chef y brigada)",
+    post_3: "Bañera y plata",
+    post_4: "Detectar lo que no cierra (metáfora del truco)",
+    post_5: "Agente 1 — redactar escritos a mano (testimonial)",
+    post_6: "Diseño con base en AI Fluency (\"Vos aportás. La IA aporta.\")",
+    post_7: "Agente 2 — cargar demandas (testimonial)",
+    post_8: "¿Por qué inventa?",
+    post_9: "Demo: turnos médicos por WhatsApp",
+    post_10: "El costo invisible de saltear el HITL experto",
+    post_11: "Responsabilidad legal por IA",
+    post_12: "La IA no alucina menos, alucina distinto",
+    post_13: "¿En qué nivel está tu proceso de HITL?",
+    post_14: "Auditora legal de IA",
+    post_15: "La IA es un copiloto, no un capitán",
+    post_16: "La IA hace el borrador. Tu criterio cobra el extra.",
     sistemas_si_p: "Pymes y profesionales con tareas repetitivas que hoy les comen horas — turnos, caja, stock, seguimiento de clientes, formularios, presupuestos, escritos.",
     sistemas_no_h3: "No, si sos",
     sistemas_no_p: "Un corporativo grande con área de IT propia, o buscás soporte técnico de software en general — esto es diseño de sistemas a medida, no una mesa de ayuda.",
@@ -982,6 +1037,10 @@ var i18n = {
     omc_rotulo: "Perfil B",
     omc_h2: "Comercio exterior / OMC",
     omc_presentacion_p: "Capacitación y asesoría técnica en los tres acuerdos de defensa comercial de la OMC, para exportadores argentinos, empresas extranjeras y consultoras de comercio exterior.",
+    omc_papers_h3: "Análisis publicados",
+    omc_paper_ds616: "Los subsidios transnacionales ante la OMC: el caso DS616 (acero inoxidable, Indonesia)",
+    omc_paper_china: "China impugna 30 artículos del Acuerdo SMC (DS630)",
+    omc_paper_232: "Sección 232: aranceles de EE.UU. y la parálisis del Órgano de Apelación",
     omc_si_p: "Un exportador argentino investigado en el exterior, una empresa extranjera que necesita entender su propio procedimiento, o una consultora/cámara que necesita capacitación o sistemas.",
     omc_no_h3: "No, si necesitás",
     omc_no_p: "Representación ante autoridades argentinas competentes, o asesoría sobre un expediente en el que haya intervenido antes — eso no lo puedo tomar, sin excepción.",
@@ -1043,6 +1102,23 @@ var i18n = {
     sobremi_cifra: "31 years",
     sobremi_resto: "of catching the single error that can sink an entire investigation — first in Argentina's international trade defense, now applied to auditing AI systems. I design systems that take repetitive, non-expert tasks off the plate of law firms, consultancies and small businesses, and advise on international trade and WTO matters within incompatibility limits I disclose upfront.",
     sistemas_presentacion_p: "I design and implement AI systems that give boutique law firms, consultancies and small businesses back hours every week — already validated with a real Buenos Aires firm.",
+    sistemas_papers_h3: "Cases and posts",
+    post_1: "Get your expert hours back without losing control (soccer/VAR)",
+    post_2: "30 years hunting for the word that changes a whole paragraph (chef and kitchen brigade)",
+    post_3: "The leaky bathtub and your money",
+    post_4: "Spotting what doesn't add up (the magic-trick metaphor)",
+    post_5: "Agent 1 — drafting filings by hand (testimonial)",
+    post_6: "Designing with AI Fluency (\"You bring your part. AI brings its part.\")",
+    post_7: "Agent 2 — loading new filings (testimonial)",
+    post_8: "Why does it make things up?",
+    post_9: "Demo: medical appointments via WhatsApp",
+    post_10: "The invisible cost of skipping expert HITL",
+    post_11: "AI Legal Liability",
+    post_12: "AI doesn't hallucinate less",
+    post_13: "Which level is your pipeline at?",
+    post_14: "AI Legal Auditor",
+    post_15: "AI is a co-pilot, not a captain",
+    post_16: "AI creates the draft. Your judgment earns the premium.",
     sistemas_si_p: "Small businesses and professionals with repetitive tasks eating up their hours — bookings, cash register, stock, client follow-up, forms, quotes, filings.",
     sistemas_no_h3: "No, if you are",
     sistemas_no_p: "A large corporation with its own IT department, or you're looking for general software support — this is custom systems design, not a help desk.",
@@ -1092,6 +1168,10 @@ var i18n = {
     omc_rotulo: "Profile B",
     omc_h2: "International Trade / WTO",
     omc_presentacion_p: "Training and technical advisory on the WTO's three trade defense agreements, for Argentine exporters, foreign companies and trade consultancies.",
+    omc_papers_h3: "Published analysis",
+    omc_paper_ds616: "Transnational subsidies before the WTO: the DS616 case (Indonesian stainless steel)",
+    omc_paper_china: "China challenges 30 SCM Agreement articles (DS630)",
+    omc_paper_232: "Section 232: US tariffs and the Appellate Body paralysis",
     omc_si_p: "An Argentine exporter under investigation abroad, a foreign company that needs to understand its own domestic procedure, or a consultancy/trade chamber that needs training or systems.",
     omc_no_h3: "No, if you need",
     omc_no_p: "Representation before competent Argentine authorities, or advice on a case I've been involved in before — that I can't take on, no exceptions.",
@@ -1716,7 +1796,10 @@ var posts = [
     link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_legal-precision-in-the-age-of-ai-activity-7457014549117009922-7cz8' },
   { titulo: { es: 'La IA es un copiloto, no un capitán', en: 'AI is a co-pilot, not a captain' },
     resumen: { es: 'La IA nos da velocidad, pero también alucinaciones que pueden costar contratos y prestigio.', en: 'AI gives us speed, but also hallucinations that can cost contracts and reputation.' },
-    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ia-aliada-o-riesgo-reputacional-activity-7445134298799677440-xnlv' }
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ia-aliada-o-riesgo-reputacional-activity-7445134298799677440-xnlv' },
+  { titulo: { es: 'La IA hace el borrador. Tu criterio cobra el extra.', en: 'AI creates the draft. Your judgment earns the premium.' },
+    resumen: { es: 'Si tu cliente siente que el contrato lo redactó un bot de $20, te va a pagar como a un bot de $20.', en: "If your client feels your contract was drafted by a $20 bot, they'll pay you like a $20 bot." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-creates-the-draft-your-judgment-earns-activity-7452670054837522432-CTO-' }
 ];
 
 var fuseBuscador = null;
