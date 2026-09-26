@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Nunito:wght@400;700&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
 
 <style>
 /* ============================================================
@@ -517,6 +518,22 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 }
 .calculadora__resultado .cifra { font-size: 1.4rem; }
 .calculadora__nota { font-size: .85rem; color: var(--slate); margin-top: 6px; }
+
+/* ============================================================
+   13) BUSCADOR (Fase 12, v5)
+   ============================================================ */
+.buscador-input {
+  width: 100%; padding: 12px 16px; border-radius: var(--radio);
+  border: 1px solid rgba(var(--blanco-rgb), .35); background: var(--blanco);
+  color: var(--navy); font-family: var(--font-cuerpo); font-size: 1rem;
+}
+.buscador-resultados { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; max-height: 50vh; overflow-y: auto; }
+.buscador-item {
+  display: block; background: var(--blanco); border-radius: var(--radio); padding: 12px 14px; text-decoration: none;
+}
+.buscador-item__titulo { font-family: var(--font-titulos); font-weight: 600; color: var(--teal-dark); font-size: .95rem; }
+.buscador-item__resumen { font-size: .85rem; color: var(--navy); margin-top: 2px; }
+.buscador-vacio { color: rgba(var(--blanco-rgb), .7); font-size: .9rem; padding: 8px 0; }
 </style>
 </head>
 <body>
@@ -546,8 +563,11 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 <!-- Panel de búsqueda: el buscador funcional se conecta en la Fase 12 -->
 <div class="panel-buscador" id="panel-buscador" hidden>
   <div class="contenedor">
-    <!-- Fase 12: acá va el buscador de contenidos propios -->
-    <div id="buscador" class="placeholder-widget" data-i18n-label="ph_buscador" data-label="Buscador de contenidos (Fase 12)"></div>
+    <!-- Fase 12: buscador de contenidos propios, con Fuse.js -->
+    <div id="buscador">
+      <input type="text" id="buscador-input" class="buscador-input" autocomplete="off">
+      <div id="buscador-resultados" class="buscador-resultados"></div>
+    </div>
   </div>
 </div>
 
@@ -1164,6 +1184,19 @@ function aplicarIdioma(lang) {
     renderAutodiagOmc();
     renderCalculadora();
   }
+
+  // Fase 12 (v5): el buscador cachea el idioma en su índice — hay que
+  // reconstruirlo y traducir el placeholder cuando cambia el idioma.
+  // Mismo cuidado de hoisting que la galería: se chequea "posts" (el
+  // array de datos), no solo la función, para no llamarla antes de tiempo.
+  if (typeof posts !== 'undefined' && typeof inicializarBuscador === 'function') {
+    var inputB = document.getElementById('buscador-input');
+    if (inputB) {
+      inputB.placeholder = lang === 'en' ? 'Search…' : 'Buscar…';
+      inicializarBuscador();
+      document.getElementById('buscador-resultados').innerHTML = '';
+    }
+  }
 }
 
 function fijarIdioma(lang) {
@@ -1625,6 +1658,112 @@ document.addEventListener('click', function (evento) {
 renderAutodiagSistemas();
 renderAutodiagOmc();
 renderCalculadora();
+
+/* ============================================================
+   FASE 12 (v5) — BUSCADOR DE CONTENIDOS (posts propios + demos)
+   ============================================================ */
+var posts = [
+  { titulo: { es: 'Recuperá horas de tu tiempo experto sin resignar el control (fútbol/VAR)', en: 'Get your expert hours back without losing control (soccer/VAR)' },
+    resumen: { es: 'Recuperá horas de tu tiempo experto sin resignar el control de lo que se hace en tu nombre.', en: 'Get back hours of your expert time without giving up control over what gets done in your name.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_recuper%C3%A1-horas-activity-7500525753294393344-rK1_' },
+  { titulo: { es: '30 años buscando la palabra que cambia todo un párrafo (chef y brigada)', en: "30 years hunting for the word that changes a whole paragraph (chef and kitchen brigade)" },
+    resumen: { es: 'Pasé 30 años buscando la palabra que cambia el sentido de todo un párrafo. Hoy diseño sistemas de automatización con ese mismo criterio incorporado.', en: 'I spent 30 years hunting for the word that changes the meaning of a whole paragraph. Today I design automation systems with that same judgment built in.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_el-chef-y-su-equipo-activity-7501614569094668288-ro-J' },
+  { titulo: { es: 'Bañera y plata', en: 'The leaky bathtub and your money' },
+    resumen: { es: 'Hay algo que se fuga en tu estudio, y no es tiempo. Es dinero. Cada consulta que se pierde entre WhatsApp, email e Instagram es plata que ya facturaste y no vas a cobrar.', en: "Something is leaking out of your practice, and it's not time — it's money. Every inquiry lost between WhatsApp, email and Instagram is money you already earned and won't collect." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_hay-algo-que-se-fuga-en-tu-estudio-y-no-activity-7503060314234609664-_9R-' },
+  { titulo: { es: 'Detectar lo que no cierra (metáfora del truco)', en: "Spotting what doesn't add up (the magic-trick metaphor)" },
+    resumen: { es: 'El reflejo de detectar el error antes de terminar de leer, aplicado a diseñar sistemas de IA: los puntos de verificación van adentro del proceso, no después.', en: 'The instinct for spotting an error before finishing the page, applied to designing AI systems: checkpoints go inside the process, not after it.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_detectar-lo-que-no-cierra-activity-7503784870893084672-epj2' },
+  { titulo: { es: 'Agente 1 — redactar escritos a mano (testimonial)', en: 'Agent 1 — drafting filings by hand (testimonial)' },
+    resumen: { es: 'Mismo caso, mismos hechos, dos redacciones completamente distintas — una suena a IA genérica, la otra suena al abogado.', en: "Same case, same facts, two completely different drafts — one sounds like generic AI, the other sounds like the lawyer." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_mismo-caso-mismos-hechos-dos-redacciones-activity-7504148570665689089-qkv6' },
+  { titulo: { es: 'Diseño con base en AI Fluency ("Vos aportás. La IA aporta.")', en: 'Designing with AI Fluency ("You bring your part. AI brings its part.")' },
+    resumen: { es: 'No delego juicio, delego volumen — el criterio que uso para diseñar sistemas con IA, basado en el framework AI Fluency de Anthropic.', en: "I don't delegate judgment, I delegate volume — the criterion I use to design AI systems, based on Anthropic's AI Fluency framework." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-fluency-activity-7505596752243343360-5eSC' },
+  { titulo: { es: 'Agente 2 — cargar demandas (testimonial)', en: 'Agent 2 — loading new filings (testimonial)' },
+    resumen: { es: 'En Tribunales, un día de diferencia no es un detalle. Es la causa.', en: "In court, a one-day difference isn't a detail. It's the whole case." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_en-tribunales-un-d%C3%ADa-de-diferencia-no-es-activity-7506330293096611840-trrc' },
+  { titulo: { es: '¿Por qué inventa?', en: 'Why does it make things up?' },
+    resumen: { es: 'Un sistema de IA no sabe que no sabe algo.', en: "An AI system doesn't know when it doesn't know something." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_por-qu%C3%A9-inventa-activity-7508138788414648320--Czd' },
+  { titulo: { es: 'Demo: turnos médicos por WhatsApp', en: 'Demo: medical appointments via WhatsApp' },
+    resumen: { es: 'Cada turno es una interrupción por WhatsApp — a la tarde ya nadie sabe con certeza qué quedó confirmado.', en: "Every booking means one more WhatsApp interruption — by evening no one's sure what got confirmed." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_hasta-ac%C3%A1-mis-posts-hablaban-de-estudios-activity-7508870822539714560-gZiL' },
+  { titulo: { es: 'Sección 232', en: 'Section 232' },
+    resumen: { es: 'Los paneles de la OMC de 2022 fallaron que los aranceles de EE.UU. a acero y aluminio violan el GATT — con el Órgano de Apelación paralizado, ambas partes actúan sobre interpretaciones incompatibles.', en: 'The 2022 WTO panels ruled that Section 232 tariffs violate GATT — with no functioning Appellate Body, the US and its trading partners now act on incompatible legal interpretations.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_us-section-232-vs-sg-activity-7463253196451430400-7Qvi' },
+  { titulo: { es: 'China impugna 30 artículos del Acuerdo SMC', en: 'China challenges 30 SCM Agreement articles' },
+    resumen: { es: 'China impugna cerca de 30 artículos del Acuerdo SMC en un solo caso — DS630, sobre los vehículos eléctricos chinos, es la disputa de subsidios más importante del sistema OMC hoy.', en: 'China challenges ~30 SCM Agreement articles in a single case — DS630, on EU duties on Chinese EVs, is the most consequential subsidy dispute in the WTO system right now.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ds630-the-case-that-will-rewrite-scm-agreement-activity-7471171476331585537-OxYF' },
+  { titulo: { es: 'Los subsidios transnacionales ante la OMC: el caso DS616 (acero inoxidable, Indonesia)', en: 'Transnational subsidies before the WTO: the DS616 case (Indonesian stainless steel)' },
+    resumen: { es: 'Análisis del informe del Grupo Especial en DS616 sobre si un Miembro de la OMC puede compensar subsidios de otro país, y por qué la parálisis del Órgano de Apelación deja la pregunta sin resolver.', en: "Analysis of the DS616 panel report on whether a WTO Member can impose countervailing duties on another country's subsidies, and why the Appellate Body's paralysis leaves the question unresolved." },
+    link: 'https://claude.ai/artifact/32G52B8o8rDi8YRY9a8zCu' },
+  { titulo: { es: 'El costo invisible de saltear el HITL experto', en: 'The invisible cost of skipping expert HITL' },
+    resumen: { es: 'Saltear la revisión humana experta parece un ahorro, hasta que la factura llega por otro lado: retrabajo, daño reputacional, exposición regulatoria.', en: 'Skipping expert HITL looks like savings until the bill arrives in a different budget line: rework, reputational damage, regulatory exposure.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_the-cost-of-skipping-expert-hitl-activity-7469557656840564736-JgiH' },
+  { titulo: { es: 'Responsabilidad legal por IA', en: 'AI Legal Liability' },
+    resumen: { es: 'Si tu empresa usa IA para generar contratos o informes regulatorios, la salida —y la responsabilidad— es tuya.', en: 'If your company uses AI to produce contracts or regulatory filings, the output — and the liability — is yours.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-legal-liability-activity-7467549607766536193-O6cJ' },
+  { titulo: { es: 'La IA no alucina menos, alucina distinto', en: "AI doesn't hallucinate less" },
+    resumen: { es: 'El nuevo error es más difícil de detectar: el modelo cita la norma correcta y la aplica mal — el resultado parece válido sin serlo.', en: "The new failure mode is harder to catch: the model cites the right rule and applies it wrong — it looks valid, but isn't." },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-doesnt-hallucinate-less-activity-7462143693387554817-OEtY' },
+  { titulo: { es: '¿En qué nivel está tu proceso de HITL?', en: 'Which level is your pipeline at?' },
+    resumen: { es: 'La mayoría dice tener HITL, pero pocos saben en qué nivel real están — la distancia entre el nivel 1 y el 4 define qué errores se pueden detectar.', en: 'Most teams say they have HITL, but few know which level they actually operate at — the gap between Level 1 and Level 4 determines which errors get caught.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_hitl-which-level-is-your-pipeline-at-activity-7465361960847663106-pcyT' },
+  { titulo: { es: 'Auditora legal de IA', en: 'AI Legal Auditor' },
+    resumen: { es: 'Por qué tu IA necesita una abogada, no solo un prompt engineer — 30 años de precisión en la OMC aplicados hoy a auditar alucinaciones como riesgos estratégicos.', en: 'Why your AI needs a lawyer, not just a prompt engineer — 30 years of WTO-level precision now applied to auditing AI hallucinations as strategic risks.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_legal-precision-in-the-age-of-ai-activity-7457014549117009922-7cz8' },
+  { titulo: { es: 'La IA es un copiloto, no un capitán', en: 'AI is a co-pilot, not a captain' },
+    resumen: { es: 'La IA nos da velocidad, pero también alucinaciones que pueden costar contratos y prestigio.', en: 'AI gives us speed, but also hallucinations that can cost contracts and reputation.' },
+    link: 'https://www.linkedin.com/posts/sandra-barraza-law-ai_ia-aliada-o-riesgo-reputacional-activity-7445134298799677440-xnlv' }
+];
+
+var fuseBuscador = null;
+
+function idiomaActualBuscador() { return document.documentElement.lang === 'en' ? 'en' : 'es'; }
+
+function indiceBuscador() {
+  var lang = idiomaActualBuscador();
+  var deDemos = (typeof catalogoDemos !== 'undefined' ? catalogoDemos : []).map(function (d) {
+    return { titulo: d.titulo[lang], resumen: d.sirve[lang], link: '#sistemas-galeria' };
+  });
+  var dePosts = posts.map(function (p) {
+    return { titulo: p.titulo[lang], resumen: p.resumen[lang], link: p.link };
+  });
+  return dePosts.concat(deDemos);
+}
+
+function inicializarBuscador() {
+  fuseBuscador = new Fuse(indiceBuscador(), { keys: ['titulo', 'resumen'], threshold: 0.35 });
+}
+
+function renderResultadosBuscador(query) {
+  var lang = idiomaActualBuscador();
+  var cont = document.getElementById('buscador-resultados');
+  if (!query) { cont.innerHTML = ''; return; }
+  var resultados = fuseBuscador.search(query).slice(0, 8);
+  if (resultados.length === 0) {
+    var sinResultados = lang === 'en' ? 'No results.' : 'Sin resultados.';
+    cont.innerHTML = '<p class="buscador-vacio">' + sinResultados + '</p>';
+    return;
+  }
+  cont.innerHTML = resultados.map(function (r) {
+    var item = r.item;
+    var esAncla = item.link.indexOf('#') === 0;
+    var atributos = esAncla ? '' : ' target="_blank" rel="noopener"';
+    return '<a class="buscador-item" href="' + item.link + '"' + atributos + '>' +
+      '<div class="buscador-item__titulo">' + item.titulo + '</div>' +
+      '<div class="buscador-item__resumen">' + item.resumen + '</div></a>';
+  }).join('');
+}
+
+var inputBuscador = document.getElementById('buscador-input');
+if (inputBuscador) {
+  inputBuscador.placeholder = idiomaActualBuscador() === 'en' ? 'Search…' : 'Buscar…';
+  inicializarBuscador();
+  inputBuscador.addEventListener('input', function () { renderResultadosBuscador(inputBuscador.value.trim()); });
+}
 </script>
 
 </body>
