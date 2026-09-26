@@ -474,6 +474,49 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
   color: var(--teal-dark); margin-bottom: 6px;
 }
 .porque-item p { font-size: .95rem; }
+
+/* ============================================================
+   12) AUTODIAGNÓSTICO + CALCULADORA (Fase 13, v5)
+   ============================================================ */
+.autodiag-pregunta { margin-bottom: 18px; }
+.autodiag-pregunta p { font-weight: 700; margin-bottom: 8px; }
+.autodiag-opciones { display: flex; flex-direction: column; gap: 8px; }
+.autodiag-opcion {
+  text-align: left; background: var(--blanco); border: 1px solid var(--slate);
+  border-radius: var(--radio); padding: 10px 14px; font-family: var(--font-cuerpo);
+  font-size: .95rem; color: var(--navy); cursor: pointer;
+}
+.autodiag-opcion.seleccionada { border-color: var(--teal); background: rgba(var(--teal-rgb), .1); border-width: 2px; }
+.autodiag-boton {
+  background: var(--magenta); color: var(--blanco); border: none;
+  border-radius: var(--radio); padding: 12px 22px; font-weight: 600; margin-top: 8px;
+}
+.autodiag-boton:disabled { background: var(--slate); cursor: not-allowed; }
+.autodiag-resultado {
+  margin-top: 16px; padding: 16px; border-radius: var(--radio);
+  border-left: 4px solid var(--teal);
+}
+.autodiag-resultado.alerta { border-left-color: var(--magenta); }
+.autodiag-resultado__cta {
+  display: inline-block; margin-top: 10px; background: var(--teal); color: var(--blanco);
+  border: none; border-radius: var(--radio); padding: 9px 16px; font-weight: 600; text-decoration: none;
+}
+
+.calculadora {
+  margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(var(--navy-rgb), .1);
+}
+.calculadora__campos { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0; }
+.calculadora__campo { flex: 1; min-width: 180px; }
+.calculadora__campo label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
+.calculadora__campo input {
+  width: 100%; padding: 10px; border: 1px solid var(--slate); border-radius: var(--radio);
+  font-family: var(--font-cuerpo); font-size: 1rem;
+}
+.calculadora__resultado {
+  background: rgba(var(--teal-rgb), .08); border-radius: var(--radio); padding: 16px; margin-top: 12px;
+}
+.calculadora__resultado .cifra { font-size: 1.4rem; }
+.calculadora__nota { font-size: .85rem; color: var(--slate); margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -614,10 +657,10 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <div class="bloque bloque-autodiagnostico" id="sistemas-autodiagnostico">
         <h3 data-i18n="sistemas_autodiag_h3">¿Cuánto tiempo estás perdiendo?</h3>
         <p data-i18n="sistemas_autodiag_p">Un formulario corto sobre las tareas repetitivas del estudio o la consultora, que devuelve una estimación de horas semanales recuperables.</p>
-        <!-- Fase 13: acá va el formulario de autodiagnóstico del Perfil A -->
-        <div id="autodiagnostico-sistemas" class="placeholder-widget" data-i18n-label="ph_autodiag_sistemas" data-label="Autodiagnóstico — Perfil A (Fase 13)"></div>
-        <!-- Fase 13 (v5): calculadora de horas liberadas — placeholder -->
-        <div id="calculadora-horas" class="placeholder-widget" data-i18n-label="ph_calculadora" data-label="Calculadora de horas liberadas (Fase 13)"></div>
+        <!-- Fase 13: formulario de autodiagnóstico del Perfil A, generado por JS -->
+        <div id="autodiagnostico-sistemas"></div>
+        <!-- Fase 13 (v5): calculadora de horas liberadas, generada por JS -->
+        <div id="calculadora-horas"></div>
       </div>
 
       <!-- Cómo trabajo -->
@@ -739,8 +782,8 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
       <div class="bloque bloque-autodiagnostico" id="omc-autodiagnostico">
         <h3 data-i18n="omc_autodiag_h3">¿Tu caso entra en lo que puedo tomar?</h3>
         <p data-i18n="omc_autodiag_p">Un cuestionario corto sobre el tipo de trámite, el país involucrado y si Argentina es parte, que devuelve al instante si el caso está dentro de mis límites de incompatibilidad.</p>
-        <!-- Fase 13: acá va el formulario de autodiagnóstico del Perfil B -->
-        <div id="autodiagnostico-omc" class="placeholder-widget" data-i18n-label="ph_autodiag_omc" data-label="Autodiagnóstico — Perfil B (Fase 13)"></div>
+        <!-- Fase 13: formulario de autodiagnóstico del Perfil B, generado por JS -->
+        <div id="autodiagnostico-omc"></div>
       </div>
 
       <!-- Cómo trabajo -->
@@ -1114,6 +1157,13 @@ function aplicarIdioma(lang) {
   // script llega a esa línea — por eso se chequea la variable de datos,
   // no solo la función, para no redibujar antes de tiempo.
   if (typeof catalogoDemos !== 'undefined' && typeof renderGaleria === 'function') renderGaleria();
+
+  // Fase 13 (v5): autodiagnósticos y calculadora — mismo motivo de fondo.
+  if (typeof preguntasSistemas !== 'undefined') {
+    renderAutodiagSistemas();
+    renderAutodiagOmc();
+    renderCalculadora();
+  }
 }
 
 function fijarIdioma(lang) {
@@ -1393,6 +1443,188 @@ document.addEventListener('click', function (evento) {
 });
 
 renderGaleria();
+
+/* ============================================================
+   FASE 13 (v5) — AUTODIAGNÓSTICO (los dos perfiles) + CALCULADORA
+   ============================================================ */
+function idiomaActual13() { return document.documentElement.lang === 'en' ? 'en' : 'es'; }
+
+var preguntasSistemas = [
+  { pregunta: { es: '¿Cuántas horas por semana le dedicás, en total, a una tarea repetitiva (turnos, caja, stock, formularios, seguimiento de clientes)?', en: 'How many hours a week do you spend, in total, on a repetitive task (bookings, cash register, stock, forms, client follow-up)?' },
+    opciones: [
+      { texto: { es: 'Menos de 2 horas', en: 'Less than 2 hours' }, puntos: 0 },
+      { texto: { es: 'Entre 2 y 5 horas', en: 'Between 2 and 5 hours' }, puntos: 1 },
+      { texto: { es: 'Más de 5 horas', en: 'More than 5 hours' }, puntos: 2 }
+    ] },
+  { pregunta: { es: '¿Esa tarea la hacen a mano, vos o tu equipo?', en: 'Is that task done by hand, by you or your team?' },
+    opciones: [
+      { texto: { es: 'No, ya está bastante automatizada', en: "No, it's already fairly automated" }, puntos: 0 },
+      { texto: { es: 'Sí, parcialmente', en: 'Yes, partially' }, puntos: 1 },
+      { texto: { es: 'Sí, completamente a mano', en: 'Yes, completely by hand' }, puntos: 2 }
+    ] },
+  { pregunta: { es: '¿Alguna vez perdiste un turno, un pedido o un dato de un cliente por hacerlo a mano?', en: "Have you ever lost a booking, an order or a client's info by doing it by hand?" },
+    opciones: [
+      { texto: { es: 'Nunca', en: 'Never' }, puntos: 0 },
+      { texto: { es: 'Alguna vez', en: 'A few times' }, puntos: 1 },
+      { texto: { es: 'Más seguido de lo que quisiera', en: "More often than I'd like" }, puntos: 2 }
+    ] },
+  { pregunta: { es: '¿Ya usás alguna herramienta digital para esto (aunque sea una planilla)?', en: 'Do you already use any digital tool for this (even a spreadsheet)?' },
+    opciones: [
+      { texto: { es: 'Sí, y funciona bien', en: 'Yes, and it works well' }, puntos: 0 },
+      { texto: { es: 'Sí, pero es un lío', en: "Yes, but it's a mess" }, puntos: 1 },
+      { texto: { es: 'No, todo es manual o en papel', en: "No, it's all manual or on paper" }, puntos: 2 }
+    ] }
+];
+var respuestasSistemas = [];
+
+function renderAutodiagSistemas() {
+  var lang = idiomaActual13();
+  var cont = document.getElementById('autodiagnostico-sistemas');
+  if (!cont) return;
+  var html = preguntasSistemas.map(function (p, i) {
+    var opciones = p.opciones.map(function (o, j) {
+      var sel = respuestasSistemas[i] === j ? ' seleccionada' : '';
+      return '<button class="autodiag-opcion' + sel + '" data-pregunta="' + i + '" data-opcion="' + j + '" data-grupo="sistemas">' + o.texto[lang] + '</button>';
+    }).join('');
+    return '<div class="autodiag-pregunta"><p>' + p.pregunta[lang] + '</p><div class="autodiag-opciones">' + opciones + '</div></div>';
+  }).join('');
+  var listas = respuestasSistemas.length === preguntasSistemas.length && respuestasSistemas.every(function (r) { return r !== undefined; });
+  var btnLabel = lang === 'en' ? 'See my result' : 'Ver mi resultado';
+  html += '<button class="autodiag-boton" id="btn-resultado-sistemas"' + (listas ? '' : ' disabled') + '>' + btnLabel + '</button>';
+  html += '<div id="resultado-sistemas"></div>';
+  cont.innerHTML = html;
+}
+
+function calcularResultadoSistemas() {
+  var lang = idiomaActual13();
+  var puntos = respuestasSistemas.reduce(function (acc, r, i) { return acc + preguntasSistemas[i].opciones[r].puntos; }, 0);
+  var textos = {
+    urgente: { es: 'Esto es urgente: estás perdiendo bastante tiempo (y probablemente plata) en algo que se puede resolver.', en: "This is urgent: you're losing a fair amount of time (and probably money) on something that can be fixed." },
+    medio: { es: 'Vale la pena mirarlo. Mirá la galería de demos — seguro hay una parecida a tu caso.', en: "It's worth a look. Check the demo gallery — there's probably one similar to your case." },
+    bajo: { es: 'Por ahora no parece la prioridad. Si eso cambia, la galería de demos te va a dar una idea de qué se puede hacer.', en: "It doesn't look like a priority for now. If that changes, the demo gallery will give you an idea of what's possible." }
+  };
+  var ctaAgendar = lang === 'en' ? 'Book 20 minutes' : 'Agendá 20 minutos';
+  var ctaGaleria = lang === 'en' ? 'See the demos' : 'Ver la galería de demos';
+  var nivel = puntos >= 6 ? 'urgente' : puntos >= 3 ? 'medio' : 'bajo';
+  var claseAlerta = nivel === 'urgente' ? ' alerta' : '';
+  var cta = nivel === 'urgente'
+    ? '<button class="autodiag-resultado__cta" data-abrir-calendario>' + ctaAgendar + '</button>'
+    : '<a class="autodiag-resultado__cta" href="#sistemas-galeria">' + ctaGaleria + '</a>';
+  document.getElementById('resultado-sistemas').innerHTML =
+    '<div class="autodiag-resultado' + claseAlerta + '"><p>' + textos[nivel][lang] + '</p>' + cta + '</div>';
+}
+
+// Perfil OMC: no es puntaje, es un chequeo directo de compliance
+var preguntasOmc = [
+  { pregunta: { es: '¿La investigación o el trámite es ante una autoridad argentina?', en: 'Is the investigation or proceeding before an Argentine authority?' },
+    opciones: [ { texto: { es: 'Sí', en: 'Yes' }, riesgo: true }, { texto: { es: 'No', en: 'No' }, riesgo: false } ] },
+  { pregunta: { es: '¿Argentina es parte directa en esta controversia (por ejemplo, ante la OMC)?', en: 'Is Argentina a direct party in this dispute (e.g. before the WTO)?' },
+    opciones: [ { texto: { es: 'Sí', en: 'Yes' }, riesgo: true }, { texto: { es: 'No', en: 'No' }, riesgo: false } ] },
+  { pregunta: { es: '¿Podría relacionarse con un caso en el que trabajé antes, en mi función en el organismo argentino de comercio exterior?', en: 'Could it be related to a case I worked on before, in my role at the Argentine trade defense agency?' },
+    opciones: [ { texto: { es: 'Sí', en: 'Yes' }, riesgo: true }, { texto: { es: 'No', en: 'No' }, riesgo: false }, { texto: { es: 'No estoy seguro/a', en: "I'm not sure" }, riesgo: true } ] }
+];
+var respuestasOmc = [];
+
+function renderAutodiagOmc() {
+  var lang = idiomaActual13();
+  var cont = document.getElementById('autodiagnostico-omc');
+  if (!cont) return;
+  var html = preguntasOmc.map(function (p, i) {
+    var opciones = p.opciones.map(function (o, j) {
+      var sel = respuestasOmc[i] === j ? ' seleccionada' : '';
+      return '<button class="autodiag-opcion' + sel + '" data-pregunta="' + i + '" data-opcion="' + j + '" data-grupo="omc">' + o.texto[lang] + '</button>';
+    }).join('');
+    return '<div class="autodiag-pregunta"><p>' + p.pregunta[lang] + '</p><div class="autodiag-opciones">' + opciones + '</div></div>';
+  }).join('');
+  var listas = respuestasOmc.length === preguntasOmc.length && respuestasOmc.every(function (r) { return r !== undefined; });
+  var btnLabel = lang === 'en' ? 'See my result' : 'Ver mi resultado';
+  html += '<button class="autodiag-boton" id="btn-resultado-omc"' + (listas ? '' : ' disabled') + '>' + btnLabel + '</button>';
+  html += '<div id="resultado-omc"></div>';
+  cont.innerHTML = html;
+}
+
+function calcularResultadoOmc() {
+  var lang = idiomaActual13();
+  var hayRiesgo = respuestasOmc.some(function (r, i) { return preguntasOmc[i].opciones[r].riesgo; });
+  var ctaAgendar = lang === 'en' ? 'Book 20 minutes' : 'Agendá 20 minutos';
+  if (hayRiesgo) {
+    var textoNo = lang === 'en'
+      ? "Based on your answers, I can't take this case — it falls within my incompatibility limits. I can still help if you have a different case, or if you're interested in training on the WTO's three trade defense agreements."
+      : 'Según tus respuestas, no puedo tomar este caso — cae dentro de mis límites de incompatibilidad. Igual puedo ayudarte si tenés otro caso, o si te interesa una capacitación sobre los tres acuerdos de defensa comercial de la OMC.';
+    document.getElementById('resultado-omc').innerHTML = '<div class="autodiag-resultado alerta"><p>' + textoNo + '</p></div>';
+  } else {
+    var textoSi = lang === 'en'
+      ? "Your case looks like it falls within what I can take on. Let's talk about the specifics."
+      : 'Tu caso parece estar dentro de lo que puedo tomar. Hablemos de los detalles.';
+    document.getElementById('resultado-omc').innerHTML =
+      '<div class="autodiag-resultado"><p>' + textoSi + '</p><button class="autodiag-resultado__cta" data-abrir-calendario>' + ctaAgendar + '</button></div>';
+  }
+}
+
+// Calculadora de horas liberadas (solo perfil #sistemas)
+function renderCalculadora() {
+  var lang = idiomaActual13();
+  var cont = document.getElementById('calculadora-horas');
+  if (!cont) return;
+  var textos = {
+    titulo: { es: 'Calculadora de horas liberadas', en: 'Time-saved calculator' },
+    horasLabel: { es: '¿Cuántas horas por semana te lleva esa tarea?', en: 'How many hours a week does that task take?' },
+    valorLabel: { es: '¿Cuánto vale tu hora?', en: "What's your hourly rate worth?" },
+    boton: { es: 'Calcular', en: 'Calculate' },
+    nota: { es: 'Estimación con tus datos; el ahorro real depende de la tarea.', en: 'Estimate based on your own numbers; actual savings depend on the task.' }
+  };
+  cont.innerHTML =
+    '<div class="calculadora"><h4>' + textos.titulo[lang] + '</h4>' +
+    '<div class="calculadora__campos">' +
+      '<div class="calculadora__campo"><label>' + textos.horasLabel[lang] + '</label><input type="number" id="calc-horas" min="0" step="0.5"></div>' +
+      '<div class="calculadora__campo"><label>' + textos.valorLabel[lang] + '</label><input type="number" id="calc-valor" min="0" step="100"></div>' +
+    '</div>' +
+    '<button class="autodiag-boton" id="btn-calcular">' + textos.boton[lang] + '</button>' +
+    '<div id="calc-resultado"></div>' +
+    '<p class="calculadora__nota">' + textos.nota[lang] + '</p></div>';
+}
+
+function calcularHoras() {
+  var lang = idiomaActual13();
+  var horas = parseFloat(document.getElementById('calc-horas').value) || 0;
+  var valor = parseFloat(document.getElementById('calc-valor').value) || 0;
+  var horasMes = horas * 4.33;
+  var pesosMes = horasMes * valor;
+  var textoHoras = lang === 'en' ? 'hours/month freed up' : 'horas/mes liberadas';
+  var textoPesos = lang === 'en' ? 'equivalent per month' : 'equivalente por mes';
+  document.getElementById('calc-resultado').innerHTML =
+    '<div class="calculadora__resultado">' +
+      '<p><span class="cifra">' + horasMes.toFixed(1) + '</span> ' + textoHoras + '</p>' +
+      '<p><span class="cifra">' + pesosMes.toLocaleString(lang === 'en' ? 'en-US' : 'es-AR', { maximumFractionDigits: 0 }) + '</span> ' + textoPesos + '</p>' +
+    '</div>';
+}
+
+// Delegación de eventos: opciones del autodiagnóstico, botones de resultado,
+// calculadora, y botones "Agendá" que se crean después de la carga inicial.
+document.addEventListener('click', function (evento) {
+  var opcion = evento.target.closest('.autodiag-opcion');
+  if (opcion) {
+    var grupo = opcion.getAttribute('data-grupo');
+    var i = parseInt(opcion.getAttribute('data-pregunta'), 10);
+    var j = parseInt(opcion.getAttribute('data-opcion'), 10);
+    if (grupo === 'sistemas') { respuestasSistemas[i] = j; renderAutodiagSistemas(); }
+    if (grupo === 'omc') { respuestasOmc[i] = j; renderAutodiagOmc(); }
+    return;
+  }
+  if (evento.target.id === 'btn-resultado-sistemas') { calcularResultadoSistemas(); return; }
+  if (evento.target.id === 'btn-resultado-omc') { calcularResultadoOmc(); return; }
+  if (evento.target.id === 'btn-calcular') { calcularHoras(); return; }
+  var btnCalDinamico = evento.target.closest('.autodiag-resultado__cta[data-abrir-calendario]');
+  if (btnCalDinamico) {
+    evento.preventDefault();
+    modalCalendario.hidden = false;
+    cerrarCalendario.focus();
+  }
+});
+
+renderAutodiagSistemas();
+renderAutodiagOmc();
+renderCalculadora();
 </script>
 
 </body>
