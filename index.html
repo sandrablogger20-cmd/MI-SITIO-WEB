@@ -385,7 +385,7 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 
 /* Marco de video: relación fija 16:9, independiente del video real */
 .demo-marco {
-  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  position: relative; width: 100%; max-width: 280px; margin: 0 auto; aspect-ratio: 9 / 16;
   background: var(--teal-dark); border-radius: var(--radio);
   overflow: hidden; cursor: pointer; border: none; padding: 0;
 }
@@ -539,6 +539,9 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 .omc-papers-lista li { border-left: 3px solid var(--magenta); padding: 6px 0 6px 14px; }
 .omc-papers-lista a { font-family: var(--font-titulos); font-weight: 600; text-decoration: none; }
 .omc-papers-lista a:hover { text-decoration: underline; }
+.omc-papers-lista a::after { content: ' ↗'; color: var(--magenta); font-weight: 700; }
+
+.cta-puente { text-align: center; padding: 32px 20px; }
 </style>
 </head>
 <body>
@@ -639,18 +642,19 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
           <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hay-algo-que-se-fuga-en-tu-estudio-y-no-activity-7503060314234609664-_9R-" target="_blank" rel="noopener" data-i18n="post_3">Bañera y plata</a></li>
           <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_detectar-lo-que-no-cierra-activity-7503784870893084672-epj2" target="_blank" rel="noopener" data-i18n="post_4">Detectar lo que no cierra (metáfora del truco)</a></li>
           <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_mismo-caso-mismos-hechos-dos-redacciones-activity-7504148570665689089-qkv6" target="_blank" rel="noopener" data-i18n="post_5">Agente 1 — redactar escritos a mano (testimonial)</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-fluency-activity-7505596752243343360-5eSC" target="_blank" rel="noopener" data-i18n="post_6">Diseño con base en AI Fluency ("Vos aportás. La IA aporta.")</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_en-tribunales-un-d%C3%ADa-de-diferencia-no-es-activity-7506330293096611840-trrc" target="_blank" rel="noopener" data-i18n="post_7">Agente 2 — cargar demandas (testimonial)</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_por-qu%C3%A9-inventa-activity-7508138788414648320--Czd" target="_blank" rel="noopener" data-i18n="post_8">¿Por qué inventa?</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hasta-ac%C3%A1-mis-posts-hablaban-de-estudios-activity-7508870822539714560-gZiL" target="_blank" rel="noopener" data-i18n="post_9">Demo: turnos médicos por WhatsApp</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_the-cost-of-skipping-expert-hitl-activity-7469557656840564736-JgiH" target="_blank" rel="noopener" data-i18n="post_10">El costo invisible de saltear el HITL experto</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-legal-liability-activity-7467549607766536193-O6cJ" target="_blank" rel="noopener" data-i18n="post_11">Responsabilidad legal por IA</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-doesnt-hallucinate-less-activity-7462143693387554817-OEtY" target="_blank" rel="noopener" data-i18n="post_12">La IA no alucina menos, alucina distinto</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hitl-which-level-is-your-pipeline-at-activity-7465361960847663106-pcyT" target="_blank" rel="noopener" data-i18n="post_13">¿En qué nivel está tu proceso de HITL?</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_legal-precision-in-the-age-of-ai-activity-7457014549117009922-7cz8" target="_blank" rel="noopener" data-i18n="post_14">Auditora legal de IA</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ia-aliada-o-riesgo-reputacional-activity-7445134298799677440-xnlv" target="_blank" rel="noopener" data-i18n="post_15">La IA es un copiloto, no un capitán</a></li>
-          <li><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-creates-the-draft-your-judgment-earns-activity-7452670054837522432-CTO-" target="_blank" rel="noopener" data-i18n="post_16">La IA hace el borrador. Tu criterio cobra el extra.</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-fluency-activity-7505596752243343360-5eSC" target="_blank" rel="noopener" data-i18n="post_6">Diseño con base en AI Fluency ("Vos aportás. La IA aporta.")</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_en-tribunales-un-d%C3%ADa-de-diferencia-no-es-activity-7506330293096611840-trrc" target="_blank" rel="noopener" data-i18n="post_7">Agente 2 — cargar demandas (testimonial)</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_por-qu%C3%A9-inventa-activity-7508138788414648320--Czd" target="_blank" rel="noopener" data-i18n="post_8">¿Por qué inventa?</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hasta-ac%C3%A1-mis-posts-hablaban-de-estudios-activity-7508870822539714560-gZiL" target="_blank" rel="noopener" data-i18n="post_9">Demo: turnos médicos por WhatsApp</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_the-cost-of-skipping-expert-hitl-activity-7469557656840564736-JgiH" target="_blank" rel="noopener" data-i18n="post_10">El costo invisible de saltear el HITL experto</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-legal-liability-activity-7467549607766536193-O6cJ" target="_blank" rel="noopener" data-i18n="post_11">Responsabilidad legal por IA</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-doesnt-hallucinate-less-activity-7462143693387554817-OEtY" target="_blank" rel="noopener" data-i18n="post_12">La IA no alucina menos, alucina distinto</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_hitl-which-level-is-your-pipeline-at-activity-7465361960847663106-pcyT" target="_blank" rel="noopener" data-i18n="post_13">¿En qué nivel está tu proceso de HITL?</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_legal-precision-in-the-age-of-ai-activity-7457014549117009922-7cz8" target="_blank" rel="noopener" data-i18n="post_14">Auditora legal de IA</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ia-aliada-o-riesgo-reputacional-activity-7445134298799677440-xnlv" target="_blank" rel="noopener" data-i18n="post_15">La IA es un copiloto, no un capitán</a></li>
+          <li class="papers-extra" hidden><a href="https://www.linkedin.com/posts/sandra-barraza-law-ai_ai-creates-the-draft-your-judgment-earns-activity-7452670054837522432-CTO-" target="_blank" rel="noopener" data-i18n="post_16">La IA hace el borrador. Tu criterio cobra el extra.</a></li>
         </ul>
+        <button class="btn-ver-todas" id="btn-ver-mas-papers" data-i18n="ver_mas_papers">Ver más</button>
       </div>
 
       <!-- Para quién sí / no -->
@@ -783,6 +787,10 @@ footer.principal .placeholder-widget::after { color: rgba(var(--blanco-rgb), .75
 
     </div>
   </section>
+
+  <div class="contenedor cta-puente">
+    <a href="#" class="btn-cta" data-abrir-calendario data-i18n="cta_agendar">Agendá 20 minutos</a>
+  </div>
 
   <!-- ============================================================
        PERFIL #omc — Comercio exterior / OMC
@@ -956,6 +964,7 @@ var i18n = {
     hero_tab_omc_titulo: "Comercio exterior / OMC",
     hero_tab_omc_desc: "Capacitación y asesoría técnica en los tres acuerdos de defensa comercial de la OMC.",
     cta_agendar: "Agendá 20 minutos",
+    cta_whatsapp: "O escribime por WhatsApp",
     presentacion_h3: "Quién soy / a quién ayudo",
     paraquien_h3: "Para quién es (y para quién no)",
     si_h3: "Sí, si sos",
@@ -970,6 +979,7 @@ var i18n = {
     sobremi_resto: "detectando el error que hunde una investigación entera — primero en la defensa comercial internacional de la Argentina, hoy aplicados a auditar sistemas de IA. Diseño sistemas que le sacan a estudios jurídicos, consultoras y pymes las tareas repetitivas que no requieren criterio profesional, y asesoro en comercio exterior y OMC dentro de límites de incompatibilidad que declaro abiertamente.",
     sistemas_presentacion_p: "Diseño e implemento sistemas de IA que le devuelven horas semanales a estudios jurídicos boutique, consultoras y pymes — ya validado con un estudio real de Buenos Aires.",
     sistemas_papers_h3: "Casos y publicaciones",
+    ver_mas_papers: "Ver más",
     post_1: "Recuperá horas de tu tiempo experto sin resignar el control (fútbol/VAR)",
     post_2: "30 años buscando la palabra que cambia todo un párrafo (chef y brigada)",
     post_3: "Bañera y plata",
@@ -1087,6 +1097,7 @@ var i18n = {
     hero_tab_omc_titulo: "International Trade / WTO",
     hero_tab_omc_desc: "Training and technical advisory on the WTO's three trade defense agreements.",
     cta_agendar: "Book 20 minutes",
+    cta_whatsapp: "Or message me on WhatsApp",
     presentacion_h3: "Who I am / who I help",
     paraquien_h3: "Who this is for (and who it isn't)",
     si_h3: "Yes, if you are",
@@ -1101,6 +1112,7 @@ var i18n = {
     sobremi_resto: "of catching the single error that can sink an entire investigation — first in Argentina's international trade defense, now applied to auditing AI systems. I design systems that take repetitive, non-expert tasks off the plate of law firms, consultancies and small businesses, and advise on international trade and WTO matters within incompatibility limits I disclose upfront.",
     sistemas_presentacion_p: "I design and implement AI systems that give boutique law firms, consultancies and small businesses back hours every week — already validated with a real Buenos Aires firm.",
     sistemas_papers_h3: "Cases and posts",
+    ver_mas_papers: "See more",
     post_1: "Get your expert hours back without losing control (soccer/VAR)",
     post_2: "30 years hunting for the word that changes a whole paragraph (chef and kitchen brigade)",
     post_3: "The leaky bathtub and your money",
@@ -1553,6 +1565,16 @@ document.addEventListener('click', function (evento) {
   if (evento.target.id === 'btn-ver-todas-demos') {
     verTodasDemos = !verTodasDemos;
     renderGrid();
+    return;
+  }
+  if (evento.target.id === 'btn-ver-mas-papers') {
+    var lang = document.documentElement.lang === 'en' ? 'en' : 'es';
+    var extras = document.querySelectorAll('#sistemas-papers .papers-extra');
+    var abrir = extras[0].hidden;
+    extras.forEach(function (li) { li.hidden = !abrir; });
+    var i18n_ver_mas = { es: 'Ver más', en: 'See more' };
+    var i18n_ver_menos = { es: 'Ver menos', en: 'See fewer' };
+    evento.target.textContent = abrir ? i18n_ver_menos[lang] : i18n_ver_mas[lang];
     return;
   }
   var marco = evento.target.closest('.demo-marco[data-video-id]');
